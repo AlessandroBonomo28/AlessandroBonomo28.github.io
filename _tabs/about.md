@@ -11,4 +11,6 @@ My name is **Alessandro Bonomo**, I am an Italian programmer with a big passion 
 - **2019** IT Technical Diploma
 - B2 English
 
+### Support this blog
 
+You can [buy me a coffe](https://buymeacoffee.com/servizibon0) to support this blog
