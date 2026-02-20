@@ -95,7 +95,8 @@ theme_mode: # [light | dark]
 cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: https://avatars.githubusercontent.com/u/75626033?s=400&u=262efe0e51065e1ebf62c9568db7c6282a29cf93&v=4
+avatar: /assets/img/ok.jpg
+#https://avatars.githubusercontent.com/u/75626033?s=400&u=262efe0e51065e1ebf62c9568db7c6282a29cf93&v=4
 #/assets/img/profile-picture.png
 
 
