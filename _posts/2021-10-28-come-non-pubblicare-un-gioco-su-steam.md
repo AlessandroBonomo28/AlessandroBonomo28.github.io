@@ -103,3 +103,5 @@ Dungeon Island rimane il mio orgoglio come programmatore. Ho implementato sistem
 
 E' stato un disastro totale ma frutto di un lavoro sincero e non di una fredda AI
 
+![Desktop View](/assets/img/posts/dung/sprites.png){: }
+_Animazioni e sprites disegnati a mano_
