@@ -34,6 +34,9 @@ _Vista CAD_
 Ora che Emiglio ha un aspetto migliore e la meccanica degli ingranaggi delle ruote funziona e permette corretamente ai motori DC di far girare le ruote possiamo passare alla fase di radiocomando.
 ### Il radiocomando per aerei
 
+![Desktop View](/assets/img/posts/emiglio/radiocommm.png){: width="500"}
+_Radiocomando e circuito saldato su PCB_
+
 Dato che non sono in possesso del radiocomando originale mi sono arrangiato con un radiocomando 2.4Ghz per aerei. Questo tipo di radiocomando trasmette i comandi tramite segnali PWM (Pulse Width Modulation): ogni canale invia un impulso con durata variabile tra circa 1000µs e 2000µs, dove il valore centrale (~1500µs) corrisponde al punto neutro dello stick.
 Il ricevitore radio viene collegato direttamente ai pin GPIO del **Raspberry Pi 1 B**. Per leggere questi segnali con precisione ho usato la libreria pigpio, che permette di misurare la durata degli impulsi in modo hardware-accurato senza dipendere dai tempi del sistema operativo. Il driver TB6612FNG si occupa di pilotare i 4 motori DC ricevendo i segnali di direzione e PWM dai GPIO del Raspberry tramite lo script `tank.py`, che implementa una logica di movimento a carri armati: le ruote dei due lati vengono gestite indipendentemente per permettere le svolte.
 
@@ -43,8 +46,6 @@ _Schema dei collegamenti_
 Tutto [il codice è opensource su github qui](https://github.com/AlessandroBonomo28/emiglio-controller)
 
 ### Risultato finale
-
-https://www.youtube.com/shorts/I8c7Y01DfZw
 
 {% include embed/youtube.html id='I8c7Y01DfZw' %}
 
