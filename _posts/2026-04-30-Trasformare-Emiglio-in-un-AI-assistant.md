@@ -19,26 +19,39 @@ Emiglio è messo un pò maluccio:
 
 Ci sarà un pò di lavoro da fare per rimetterlo a posto ma vale tutti i 20€ spesi.
 
-## Il restauro
+### Il restauro
 
-pezzi stampati in 3d e link ai pezzi
+Ho deciso di iniziare dalla parte estetica. Ho preso le misure dei pezzi danneggiati di Emiglio e li ho ristampati con la stampante 3D. Ho dovuto anche aprire Emiglio, smontare i motori DC e sostituire le rondelle di plastica dato che erano danneggiate e non facevano girare le ruote del carrello.  
 
-Ecco la cartella con tutti i files STL per stampare i vari pezzi:
-- https://github.com/AlessandroBonomo28/AlessandroBonomo28.github.io/tree/main/assets/3dfiles/emiglio/
+[In questa cartella trovate tutti i files STL](https://github.com/AlessandroBonomo28/AlessandroBonomo28.github.io/tree/main/assets/3dfiles/emiglio/) dopo aver stampato i pezzi e averli assemblati, questo è il risultato finale:
+
+![Desktop View](/assets/img/posts/emiglio/img2.png){: width="500"}
+_Emiglio come nuovo_
+
+![Desktop View](/assets/img/posts/emiglio/img1.png){: width="500"}
+_Vista CAD_
+
+Ora che Emiglio ha un aspetto migliore e la meccanica degli ingranaggi delle ruote funziona e permette corretamente ai motori DC di far girare le ruote possiamo passare alla fase di radiocomando.
+### Il radiocomando per aerei
+
+Dato che non sono in possesso del radiocomando originale mi sono arrangiato con un radiocomando 2.4Ghz per aerei. Questo tipo di radiocomando trasmette i comandi tramite segnali PWM (Pulse Width Modulation): ogni canale invia un impulso con durata variabile tra circa 1000µs e 2000µs, dove il valore centrale (~1500µs) corrisponde al punto neutro dello stick.
+Il ricevitore radio viene collegato direttamente ai pin GPIO del **Raspberry Pi 1 B**. Per leggere questi segnali con precisione ho usato la libreria pigpio, che permette di misurare la durata degli impulsi in modo hardware-accurato senza dipendere dai tempi del sistema operativo. Il driver TB6612FNG si occupa di pilotare i 4 motori DC ricevendo i segnali di direzione e PWM dai GPIO del Raspberry tramite lo script `tank.py`, che implementa una logica di movimento a carri armati: le ruote dei due lati vengono gestite indipendentemente per permettere le svolte.
+
+![Desktop View](/assets/img/posts/emiglio/schema.jpg){: width="auto"}
+_Schema dei collegamenti_
+
+Tutto [il codice è opensource su github qui](https://github.com/AlessandroBonomo28/emiglio-controller)
+
+### Risultato finale
+
+https://www.youtube.com/shorts/I8c7Y01DfZw
+
+{% include embed/youtube.html id='I8c7Y01DfZw' %}
+
+I motori ora sono alimentati da una batteria ricaricabile a 12V e il Raspberry da una powerbank, entrambi comodamente alloggiati nello zaino di Emiglio.
+Ho fatto anche dei fori con il Dremel sul retro di Emiglio per far uscire un Power LED, l'antenna radio, i cavi della batteria, l'interruttore della powerbank e il pulsante di spegnimento logico del Raspberry — necessario perché spegnere brutalmente l'alimentazione corrompe la SD card. I servizi `tank.py` e `btn.py` si avviano automaticamente al boot tramite systemd, così Emiglio è operativo non appena acceso, senza bisogno di un monitor o di connettersi in SSH.
 
 
-[guida completa originale](https://chirpy.cotes.page/posts/write-a-new-post/)
+### Parte 2
 
-# Il radiocomando per aerei
-
-Dato che non avevo il radiocomando originale mi sono arrangiato con un radiocomando 2.4Ghz per aerei in un radiocomando per robot.
-
-
-## Risultato finale
-
-(emiglio con i buchi dietro, batteria 12v)
-
-
-## parte 2
-
-Nella parte 2 vediamo come usare un raspberry pi W2 e un modulo respeaker per interagire vocalmente con Emiglio
+Nella parte 2 vediamo come usare un raspberry pi W2 e un modulo respeaker per interagire vocalmente con Emiglio. **STAY TUNED**
