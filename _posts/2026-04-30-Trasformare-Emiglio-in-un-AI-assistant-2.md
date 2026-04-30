@@ -478,10 +478,10 @@ ANSWER ONLY IN ITALIAN.
 
 ### 3.3 Definizione della funzione web_search
 
-Nella configurazione di Extended OpenAI Conversation, definisci la funzione `web_search` come in [questo
-txt file](https://github.com/AlessandroBonomo28/AlessandroBonomo28.github.io/tree/main/assets/config.txt) (ho dovuto allegarlo in un txt perchè questo blog mi dava problemi di parsing)
-
-
+Nella configurazione di Extended OpenAI Conversation, definisci la funzione `web_search`, [copiate lo snippet di codice da questo gist link](https://gist.github.com/AlessandroBonomo28/123ccc53aaa051358000ab73c43aa8f6)
 
 Quando l'agente non conosce la risposta o viene interrogato su eventi recenti, richiama automaticamente SearXNG, ottiene i risultati e li include nella risposta vocale.
 
+### Conclusione
+
+Ora possiamo interrogare vocalmente Emiglio. **STAY TUNED** per altri tutorial
