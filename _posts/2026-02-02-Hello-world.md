@@ -24,7 +24,6 @@ puoi usare gli apici per evidenziare ``` blocchi di codice ```
 {: .prompt-tip }
 
 
-
 ![Desktop View](/assets/img/posts/first-post/dog.jpg){: width="300"}
 _Ecco una immagine di esempio_
 

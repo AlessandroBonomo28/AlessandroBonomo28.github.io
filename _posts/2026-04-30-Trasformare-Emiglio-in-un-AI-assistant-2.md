@@ -17,6 +17,7 @@ _Speaker Emiglio collegato a raspberry pi zero W2 + Scheda Respeaker_
 - [HACS - Download e troubleshooting](https://hacs.xyz/docs/use/download/download/#troubleshooting)
 - [Extended OpenAI Conversation (HACS)](https://github.com/jekalmin/extended_openai_conversation)
 - [Documentazione ufficiale scheda Respeaker2 Mics Pi HAT](https://wiki.seeedstudio.com/Respeaker_2_Mics_Pi_HAT/)
+
 {% include embed/youtube.html id='XvbVePuP7NY' %}
 
 > **ATTENZIONE** ho seguito esattamente gli step illustrati in questo tutorial youtube di NetworkChuck e posso dirvi che se provate a replicarli con un raspberry pi zero W 2 avrete problemi. In questo articolo vi spiego come risolverli e tutti gli step funzionanti da eseguire ad oggi 2026/05/01. Probabilmente il tutorial di Chuck funziona senza problemi su raspberry pi 3/4/5 ma **NON** su raspberry pi zero W2.
@@ -31,7 +32,6 @@ Il sistema è composto da due macchine:
 
 ![Desktop View](/assets/img/posts/emiglio/gem.png){: width="auto"}
 _Immagine generata con Gemini_
-
 
 ## Parte 1: Server — Docker Compose
 
