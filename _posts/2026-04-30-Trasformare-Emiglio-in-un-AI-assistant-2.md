@@ -1,6 +1,6 @@
 ---
 title: "Emiglio AI assistant locale (Parte 2)"
-date: 2026-04-11 00:00:00 +0000
+date: 2026-04-30 00:00:00 +0000
 categories: [tutorials, electronics]
 tags: [tutorial, blog, electronics, IoT, embedded]
 ---
