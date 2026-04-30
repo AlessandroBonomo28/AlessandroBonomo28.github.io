@@ -1,5 +1,5 @@
 ---
-title: "Trasformare Emiglio in un AI assistant PT 1"
+title: "Emiglio AI assistant locale (Parte 1)"
 date: 2026-04-10 00:00:00 +0000
 categories: [tutorials, electronics]
 tags: [tutorial, blog, electronics, IoT, embedded]
@@ -55,4 +55,4 @@ Ho fatto anche dei fori con il Dremel sul retro di Emiglio per far uscire un Pow
 
 ### Parte 2
 
-Nella parte 2 vediamo come usare un raspberry pi W2 e un modulo respeaker per interagire vocalmente con Emiglio. **STAY TUNED**
+Nella parte 2 vediamo come usare un raspberry pi W2 e un modulo respeaker per interagire vocalmente con Emiglio. [Clicca qui per leggere la parte 2](https://alessandrobonomo28.github.io/posts/Trasformare-Emiglio-in-un-AI-assistant-2/)
