@@ -479,48 +479,8 @@ ANSWER ONLY IN ITALIAN.
 ### 3.3 Definizione della funzione web_search
 
 Nella configurazione di Extended OpenAI Conversation, definisci la funzione `web_search` come segue:
-{% raw %}
-```yaml
-- spec:
-    name: web_search
-    description: "Cerca su internet se non conosci la risposta o per fatti del 2026 (Presidente, Papa, News)."
-    parameters:
-      type: object
-      properties:
-        query:
-          type: string
-      required:
-        - query
-  function:
-    type: composite
-    sequence:
-      - type: script
-        response_variable: search_res
-        sequence:
-          - service: shell_command.searxng_search
-            data:
-              query: "{{ query }}"
-            response_variable: _function_result
-          - stop: "done"
-            response_variable: _function_result
-      - type: template
-        value_template: >
-          {% set output = search_res.stdout | default('') %}
-          {% if output != '' %}
-            {% set d = output | from_json %}
-            {% if d.results is defined and d.results | length > 0 %}
-              Dati dal Web (2026):
-              {% for i in d.results[:2] %}
-                - {{ i.title }}: {{ i.content[:250] }}
-              {% endfor %}
-            {% else %}
-              La ricerca non ha prodotto risultati utili.
-            {% endif %}
-          {% else %}
-            Attenzione: Il server di ricerca non ha risposto. Riprova tra poco.
-          {% endif %}
-```
-{% endraw %}
+
+test
 
 Quando l'agente non conosce la risposta o viene interrogato su eventi recenti, richiama automaticamente SearXNG, ottiene i risultati e li include nella risposta vocale.
 
