@@ -10,6 +10,8 @@ In questo articolo spiego come ho costruito un assistente vocale completamente s
 ![Desktop View](/assets/img/posts/emiglio/pizero.png){: width="auto"}
 _Speaker Emiglio collegato a raspberry pi zero W2 + Scheda Respeaker_
 
+{% include embed/youtube.html id='zcHoOtzRp1E' %}
+
 ## Link utili
 
 - [Wyoming Satellite - Repository ufficiale](https://github.com/rhasspy/wyoming-satellite/tree/master)
