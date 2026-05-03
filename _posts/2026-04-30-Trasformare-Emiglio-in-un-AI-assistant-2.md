@@ -409,34 +409,6 @@ WantedBy=default.target
 sudo systemctl enable --now 2mic-leds.service
 ```
 
-### 2.12 Pulsante di spegnimento sicuro
-
-Non spegnere mai il Pi togliendo la corrente brutalmente: corrompe la SD card.
-
-Aggiungi un pulsante hardware sul GPIO 17 configurando `/boot/firmware/config.txt`:
-
-```bash
-sudo nano /etc/firmware/config.txt
-```
-
-Aggiungi in fondo:
-
-```
-[all]
-enable_uart=1
-dtoverlay=i2s-mmap
-dtparam=i2s=on
-dtoverlay=gpio-shutdown,gpio_pin=17,active_low=1,gpio_pull=up
-```
-
-In alternativa, spegni sempre in modo sicuro via SSH:
-
-```bash
-ssh pi@<hostname>.local
-sudo halt
-# aspetta che i LED si spengano, poi togli la corrente
-```
-
 ## Parte 3: Agente AI con Extended OpenAI Conversation e SearXNG
 
 Questa è la parte che trasforma il satellite da semplice comando vocale a un vero assistente AI con ricerca web in tempo reale.
@@ -485,21 +457,31 @@ Nella configurazione di Extended OpenAI Conversation, definisci la funzione `web
 Quando l'agente non conosce la risposta o viene interrogato su eventi recenti, richiama automaticamente SearXNG, ottiene i risultati e li include nella risposta vocale.
 
 ### Extra Button SHUTDOWN automatico su modulo Respeaker
-Per spegnere il raspberry pi zero w 2 quando si preme il pulsante sul modulo respeaker bisogna fare così:
 
-```
+Non spegnere mai il Pi togliendo la corrente brutalmente: corrompe la SD card.
+
+Aggiungi un pulsante hardware sul GPIO 17 configurando
+
+```bash
 sudo nano /etc/firmware/config.txt
 ```
 
-e aggiungere una linea in fondo al file
+Aggiungi in fondo:
 
 ```
 [all]
 enable_uart=1
 dtoverlay=i2s-mmap
 dtparam=i2s=on
-# Questa è la riga magica da aggiungere:
 dtoverlay=gpio-shutdown,gpio_pin=17,active_low=1,gpio_pull=up
+```
+
+In alternativa, spegni sempre in modo sicuro via SSH:
+
+```bash
+ssh pi@<hostname>.local
+sudo halt
+# aspetta che i LED si spengano, poi togli la corrente
 ```
 
 **questo step è importante** perchè prima o poi ci capiterà di dover spegnere il nostro raspberry e per non staccare brutalmente la corrente e corrompere i file della SD abbiamo bisogno di uno script automatico che spegne logicamente il raspberry quando premiamo il pulsante. Possiamo capire che il raspberry si sta spegnendo osservando il suo LED verde.
