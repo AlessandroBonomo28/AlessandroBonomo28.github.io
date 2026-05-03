@@ -484,6 +484,26 @@ Nella configurazione di Extended OpenAI Conversation, definisci la funzione `web
 
 Quando l'agente non conosce la risposta o viene interrogato su eventi recenti, richiama automaticamente SearXNG, ottiene i risultati e li include nella risposta vocale.
 
+### Extra Button SHUTDOWN automatico su modulo Respeaker
+Per spegnere il raspberry pi zero w 2 quando si preme il pulsante sul modulo respeaker bisogna fare così:
+
+```
+sudo nano /etc/firmware/config.txt
+```
+
+e aggiungere una linea in fondo al file
+
+```
+[all]
+enable_uart=1
+dtoverlay=i2s-mmap
+dtparam=i2s=on
+# Questa è la riga magica da aggiungere:
+dtoverlay=gpio-shutdown,gpio_pin=17,active_low=1,gpio_pull=up
+```
+
+**questo step è importante** perchè prima o poi ci capiterà di dover spegnere il nostro raspberry e per non staccare brutalmente la corrente e corrompere i file della SD abbiamo bisogno di uno script automatico che spegne logicamente il raspberry quando premiamo il pulsante. Possiamo capire che il raspberry si sta spegnendo osservando il suo LED verde.
+
 ### Conclusione
 
-Ora possiamo interrogare vocalmente Emiglio. **STAY TUNED** per altri tutorial
+Abbiamo configurato un'AI assistant locale con websearch che possiamo interrogare localmente e vocalmente con il nostro raspberry pi zero W2. **STAY TUNED** per altri tutorial
