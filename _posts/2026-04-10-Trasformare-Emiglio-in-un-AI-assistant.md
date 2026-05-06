@@ -5,6 +5,8 @@ categories: [tutorials, electronics]
 tags: [tutorial, blog, electronics, IoT, embedded]
 ---
 
+{% include embed/youtube.html id='oEHIA1CD1nk' %}
+
 ### La storia
 Un giorno, mentre navigo su un sito di usato, mi imbatto in **un vecchio Emiglio a 20€**. Ho sempre desiderato avere un robot "jarvis" personale come in Iron Man e, senza pensarci un attimo, scrivo al venditore per acquistarlo. Il venditore mi dice che non spedisce, quindi mi metto in macchina e parto per recuperare Emiglio.
 
