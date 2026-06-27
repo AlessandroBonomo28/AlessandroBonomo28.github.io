@@ -12,13 +12,12 @@ _Speaker Emiglio collegato a raspberry pi zero W2 + Scheda Respeaker_
 
 {% include embed/youtube.html id='zcHoOtzRp1E' %}
 
-## Link utili
-
-- [Wyoming Satellite - Repository ufficiale](https://github.com/rhasspy/wyoming-satellite/tree/master)
-- [Tutorial ufficiale ReSpeaker 2-Mic](https://github.com/rhasspy/wyoming-satellite/blob/master/docs/tutorial_2mic.md)
-- [HACS - Download e troubleshooting](https://hacs.xyz/docs/use/download/download/#troubleshooting)
-- [Extended OpenAI Conversation (HACS)](https://github.com/jekalmin/extended_openai_conversation)
-- [Documentazione ufficiale scheda Respeaker2 Mics Pi HAT](https://wiki.seeedstudio.com/Respeaker_2_Mics_Pi_HAT/)
+### Lista componenti
+- [Raspberry pi zero W2](https://amzn.to/3SuylLD)
+- [Modulo Respeaker](https://amzn.to/4oQRt2t)
+- [Raspberry pi 4 B (meglio del Pi 1 B)](https://amzn.to/3R2ipQi)
+- [Batteria 12V ricaricabile](https://amzn.to/3SOVmZL)
+- [driver motori TB6612FNG](https://amzn.to/43Z6G8c)
 
 {% include embed/youtube.html id='XvbVePuP7NY' %}
 
@@ -489,3 +488,15 @@ sudo halt
 ### Conclusione
 
 Abbiamo configurato un'AI assistant locale con websearch che possiamo interrogare localmente e vocalmente con il nostro raspberry pi zero W2. **STAY TUNED** per altri tutorial
+
+## Link utili
+
+- [Wyoming Satellite - Repository ufficiale](https://github.com/rhasspy/wyoming-satellite/tree/master)
+- [Tutorial ufficiale ReSpeaker 2-Mic](https://github.com/rhasspy/wyoming-satellite/blob/master/docs/tutorial_2mic.md)
+- [HACS - Download e troubleshooting](https://hacs.xyz/docs/use/download/download/#troubleshooting)
+- [Extended OpenAI Conversation (HACS)](https://github.com/jekalmin/extended_openai_conversation)
+- [Documentazione ufficiale scheda Respeaker2 Mics Pi HAT](https://wiki.seeedstudio.com/Respeaker_2_Mics_Pi_HAT/)
+
+### Parte 3
+
+Nella parte 3 vediamo come configurare Emiglio come speaker bluetooth per collegarci direttamente con il telefono e riprodurre audio (senza scrivere codice). [Clicca qui per leggere la parte 3](https://alessandrobonomo28.github.io/posts/Trasformare-Emiglio-in-un-AI-assistant-3/)
