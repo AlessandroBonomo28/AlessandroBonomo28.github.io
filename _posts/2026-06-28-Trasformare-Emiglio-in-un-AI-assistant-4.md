@@ -44,8 +44,8 @@ I nuovi motori del telaio cingolato si presentano con un connettore a 6 fili per
 
 
 ## Risorse utili per il montaggio dei cingoli nuovi
-- [manuale montaggio cingoli](http://sposmart.com/#/Robot/FrameChassis/TS_Series/TS100/TStank)
-- [link pagina ufficiale](http://sposmart.com/#/)
+- [manuale montaggio cingoli](https://sposmart.com/#/Robot/FrameChassis/TS_Series/TS100/TStank)
+- [link pagina ufficiale](https://sposmart.com/#/)
 
 ## Il problema di stabilità
 Subito dopo aver montato i cingoli su Emiglio, prendo il radiocomando e inizio a farlo girare su sè stesso per testare il movimento laterale, che funziona correttamente
