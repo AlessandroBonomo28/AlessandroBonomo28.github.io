@@ -42,6 +42,10 @@ I nuovi motori del telaio cingolato si presentano con un connettore a 6 fili per
 
 - Collegate l'alimentazione: Prendete gli unici due fili rimanenti, ovvero quelli di potenza contrassegnati come M+ e M-. Collegate l'M+ e l'M- del cingolo destro ai morsetti del Motor A sul driver, e ripetete l'operazione per il cingolo sinistro sui morsetti del Motor B.
 
+> Nota: per montare i cingoli nuovi ho dovuto anche stampare un pezzo intermedio che collegasse la scocca di Emiglio al telaio. Eccolo, va montato sotto i piedi di Emiglio:
+
+![Desktop View](/assets/img/posts/emiglio/supportoint.png){: width="400px"}
+_Supporto interno per collegare il telaio a Emiglio_
 
 ## Risorse utili per il montaggio dei cingoli nuovi
 - [manuale montaggio cingoli](https://sposmart.com/#/Robot/FrameChassis/TS_Series/TS100/TStank)
