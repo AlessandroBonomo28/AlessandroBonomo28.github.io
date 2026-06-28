@@ -7,6 +7,8 @@ tags: [tutorial, blog, electronics, IoT, embedded]
 
 # Aumentare la stabilità del robot con dei cingoli e una ruota da carrello girevole
 
+{% include embed/youtube.html id='g96JaZwjHMA' %}
+
 ## Le vecchie ruote di Emgilio si sono rotte
 
 Dopo settimane di onorato servizio, le ruote del nostro [Emiglio robot del primo tutorial](https://alessandrobonomo28.github.io/posts/Trasformare-Emiglio-in-un-AI-assistant/) hanno smesso di funzionare... il carrello in plastica non ha retto il ripetuto stress dei motori spinti da una tensione di 12V e ad un certo punto ha ceduto. Nella gif qui di seguito si può osservare Emiglio offeso con le ruote smontate.

@@ -7,6 +7,8 @@ tags: [tutorial, blog, electronics, IoT, embedded]
 
 # Trasformare Emiglio in uno speaker bluetooth
 
+{% include embed/youtube.html id='g96JaZwjHMA' %}
+
 Nella [Parte 2](https://alessandrobonomo28.github.io/posts/Trasformare-Emiglio-in-un-AI-assistant-2/) abbiamo provato a rendere intelligente Emiglio configurando un AI assistant in locale.
 Oggi vediamo come trasformare Emiglio in uno speaker bluetooth in modo da poter riprodurre audio facilmente collegandoci con il telefono.
 
