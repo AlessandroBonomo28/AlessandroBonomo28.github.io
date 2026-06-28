@@ -20,7 +20,14 @@ Per risolvere definitvamente ho deciso di comprare dei **cazzuttissimi cingoli**
 ![Desktop View](/assets/img/posts/emiglio/cingoli.png){: width="auto"}
 _Cingoli su amazon_
 
-- [link a cingoli su amazon](https://amzn.to/441fVVf)
+### Link componenti
+
+- [CINGOLI su amazon](https://amzn.to/441fVVf)
+- [Raspberry pi zero W2](https://amzn.to/3SuylLD)
+- [Modulo Respeaker](https://amzn.to/4oQRt2t)
+- [Raspberry pi 4 B (meglio del Pi 1 B)](https://amzn.to/3R2ipQi)
+- [Batteria 12V ricaricabile](https://amzn.to/3SOVmZL)
+- [driver motori TB6612FNG](https://amzn.to/43Z6G8c)
 
 ### I motori TS100 e il nuovo cablaggio
 
@@ -36,12 +43,9 @@ I nuovi motori del telaio cingolato si presentano con un connettore a 6 fili per
 - Collegate l'alimentazione: Prendete gli unici due fili rimanenti, ovvero quelli di potenza contrassegnati come M+ e M-. Collegate l'M+ e l'M- del cingolo destro ai morsetti del Motor A sul driver, e ripetete l'operazione per il cingolo sinistro sui morsetti del Motor B.
 
 
-## Il montaggio dei cingoli nuovi
-
-TODO step di montaggio
-
-- link pagina componenti giapponesi 
-- link pagina ufficiale
+## Risorse utili per il montaggio dei cingoli nuovi
+- [manuale montaggio cingoli](http://sposmart.com/#/Robot/FrameChassis/TS_Series/TS100/TStank)
+- [link pagina ufficiale](http://sposmart.com/#/)
 
 ## Il problema di stabilità
 Subito dopo aver montato i cingoli su Emiglio, prendo il radiocomando e inizio a farlo girare su sè stesso per testare il movimento laterale, che funziona correttamente
@@ -79,11 +83,29 @@ LOOP_DELAY = 0.05        # Tempo di ciclo del while (50ms)
 ```
 In sostanza ho aggiunto un'accelerazione graduale invece di un'accelerazione istantanea. Ecco il risultato
 
-![Desktop View](/assets/img/posts/emiglio/graduale.gif){: width="auto"}
+![Desktop View](/assets/img/posts/emiglio/graduale.gif){: width="450px"}
 _Emiglio che accelera gradualmente_
 
 ### L'introduzione della ruota da carrello posteriore
 
-TODO
+Dopo la modifica al codice Emiglio era abbastanza stabile e non cadeva più ma volevo risolvere definitivamente il problema. Mi hanno suggerito di risolvere in molti modi e tra tutte le soluzioni, ragionando, quella che mi ha convinto di più è stato il ruotino da carrello girevole posteriore perchè non è invadente, è semplice e funziona.
+
+Ecco il modello in Fusion360, ha degli ammortizzatori per evitare che gli urti lo danneggino:
+
+![Desktop View](/assets/img/posts/emiglio/ruotino.jpg){: width="350px"}
+_Ruotino posteriore e progetto 3D_
+
 ## Il risultato finale
+
+![Desktop View](/assets/img/posts/emiglio/mov.gif){: width="400px"}
+_Ruotino posteriore e progetto 3D_
+
+Emgilio ora è stabile come un carro armato e pronto ad andare ovunque!
+**STAY TUNED** per i prossimi tutorial!
+
+### Prossimi sviluppi
+Ho tantissime idee, per il futuro sto lavorando a diverse cose:
+- IA full duplex che risponde in real time
+- Controllo remoto e sincronizzazione con Metaquest VR
+- Pistola ad acqua su Emiglio
 
