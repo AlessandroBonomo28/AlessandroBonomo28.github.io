@@ -103,6 +103,8 @@ _Ruotino posteriore e progetto 3D_
 Emgilio ora è stabile come un carro armato e pronto ad andare ovunque!
 **STAY TUNED** per i prossimi tutorial!
 
+{% include embed/youtube.html id='zc8rK_VowUU' %}
+
 ### Prossimi sviluppi
 Ho tantissime idee, per il futuro sto lavorando a diverse cose:
 - IA full duplex che risponde in real time
