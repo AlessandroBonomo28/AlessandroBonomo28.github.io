@@ -34,7 +34,7 @@ _Cingoli su amazon_
 ![Desktop View](/assets/img/posts/emiglio/tsmotor.png){: width="500px"}
 _Motori TS100 del telaio cingolato_
 
-I nuovi motori del telaio cingolato si presentano con un connettore a 6 fili perché includono un encoder (un sensore per misurare i giri della ruota). La modifica è semplice perchè il circuito elettronico di Emiglio rimane lo stesso del [tutorial parte 1](https://alessandrobonomo28.github.io/posts/Trasformare-Emiglio-in-un-AI-assistant-2/). Devo solo cambiare i cavi che vanno ai motori, possiamo pilotarli come dei normalissimi motori DC. Ecco i passaggi pratici:
+I nuovi motori del telaio cingolato si presentano con un connettore a 6 fili perché includono un encoder (un sensore per misurare i giri della ruota). La modifica è semplice perchè il circuito elettronico di Emiglio rimane lo stesso del [tutorial parte 1](https://alessandrobonomo28.github.io/posts/Trasformare-Emiglio-in-un-AI-assistant/). Devo solo cambiare i cavi che vanno ai motori, possiamo pilotarli come dei normalissimi motori DC. Ecco i passaggi pratici:
 
 - Scollegate i vecchi motori dell'Emiglio dalle uscite del motor driver (i morsetti del Motor A e Motor B).
 
