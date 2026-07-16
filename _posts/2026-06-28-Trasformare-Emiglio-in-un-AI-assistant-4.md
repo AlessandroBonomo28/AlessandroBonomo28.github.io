@@ -101,6 +101,7 @@ Ecco il modello in Fusion360, ha degli ammortizzatori per evitare che gli urti l
 ![Desktop View](/assets/img/posts/emiglio/ruotino.jpg){: width="350px"}
 _Ruotino posteriore e progetto 3D_
 
+- [In questa cartella trovate tutti i files STL](https://github.com/AlessandroBonomo28/AlessandroBonomo28.github.io/tree/main/assets/3dfiles/emiglio/)
 ## Il risultato finale
 
 ![Desktop View](/assets/img/posts/emiglio/mov.gif){: width="400px"}
@@ -115,5 +116,5 @@ Emgilio ora è stabile come un carro armato e pronto ad andare ovunque!
 Ho tantissime idee, per il futuro sto lavorando a diverse cose:
 - IA full duplex che risponde in real time
 - Controllo remoto e sincronizzazione con Metaquest VR
-- Pistola ad acqua su Emiglio
+- Modchip emiglio (scheda embedded)
 
