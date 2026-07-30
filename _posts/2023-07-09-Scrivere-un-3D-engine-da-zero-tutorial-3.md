@@ -1,6 +1,9 @@
 ---
 categories: [tutorials,3Dengine]
 tags: [tutorial, 3Dengine, p5js, builtfromscratch]
+image:
+  path: /assets/img/posts/3dengine/cover-3.jpg
+  alt: Matrici di proiezione in p5.js
 ---
 # Matrici di Proiezione in p5.js
 

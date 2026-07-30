@@ -1,6 +1,9 @@
 ---
 categories: [gamedev]
 tags: [gamedev,games, builtfromscratch]
+image:
+  path: /assets/img/posts/dung/1.png
+  alt: Dungeon Island, la schermata del titolo
 ---
 # Come NON pubblicare un gioco di successo su Steam
 

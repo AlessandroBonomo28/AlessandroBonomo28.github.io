@@ -3,6 +3,9 @@ title: "Come ho fatto questo blog"
 date: 2026-02-08 00:00:00 +0000
 categories: [tutorials]
 tags: [tutorial, blog]
+image:
+  path: /assets/img/posts/first-post/cover.jpg
+  alt: Un blog Jekyll con tema Chirpy ospitato su GitHub Pages
 ---
 
 # Hostare un blog su github pages gratuitamente

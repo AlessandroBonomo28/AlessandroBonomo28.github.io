@@ -3,6 +3,9 @@ title: "Emiglio bluetooth speaker (Parte 3) "
 date: 2026-06-24 00:00:00 +0000
 categories: [tutorials, electronics]
 tags: [tutorial, blog, electronics, IoT, embedded]
+image:
+  path: /assets/img/posts/emiglio/embluetooth.jpg
+  alt: Emiglio usato come speaker bluetooth da uno smartphone
 ---
 
 # Trasformare Emiglio in uno speaker bluetooth

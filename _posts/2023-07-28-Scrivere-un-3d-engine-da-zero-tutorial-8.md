@@ -1,6 +1,9 @@
 ---
 categories: [tutorials,3Dengine]
 tags: [tutorial, 3Dengine, p5js, builtfromscratch]
+image:
+  path: /assets/img/posts/3dengine/cover-8.jpg
+  alt: Importare modelli 3D in formato OBJ in p5.js
 ---
 # Importare Modelli 3D (OBJ) in p5.js
 

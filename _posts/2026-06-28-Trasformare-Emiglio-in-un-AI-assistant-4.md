@@ -3,6 +3,9 @@ title: "Emiglio robot con cingoli da carro armato (Parte 4) "
 date: 2026-06-24 00:00:00 +0000
 categories: [tutorials, electronics]
 tags: [tutorial, blog, electronics, IoT, embedded]
+image:
+  path: /assets/img/posts/emiglio/cingoli.png
+  alt: I cingoli da carro armato comprati per Emiglio
 ---
 
 # Aumentare la stabilità del robot con dei cingoli e una ruota da carrello girevole

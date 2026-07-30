@@ -1,6 +1,9 @@
 ---
 categories: [tutorials,3Dengine]
 tags: [tutorial, 3Dengine, p5js, builtfromscratch]
+image:
+  path: /assets/img/posts/3dengine/cover-1.jpg
+  alt: Introduzione a p5.js
 ---
 # Primi Passi con p5.js: Cerchi che Cadono
 

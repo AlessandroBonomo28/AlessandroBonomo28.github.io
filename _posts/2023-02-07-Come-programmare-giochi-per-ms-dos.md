@@ -1,6 +1,9 @@
 ---
 categories: [gamedev]
 tags: [assembly, gamedev, builtfromscratch]
+image:
+  path: /assets/img/posts/pongasm/p2.png
+  alt: Pong scritto in Assembly x86 in esecuzione su MS-DOS emulato
 ---
 # Scrivere Pong in Assembly x86 e lo giocarlo su MS-DOS Emulato
 

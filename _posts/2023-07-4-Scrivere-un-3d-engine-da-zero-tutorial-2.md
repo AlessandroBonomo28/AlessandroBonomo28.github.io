@@ -1,6 +1,9 @@
 ---
 categories: [tutorials,3Dengine]
 tags: [tutorial, 3Dengine, p5js, builtfromscratch]
+image:
+  path: /assets/img/posts/3dengine/cover-2.jpg
+  alt: Proiezioni 3D in p5.js
 ---
 # Proiezioni 3D in p5.js
 

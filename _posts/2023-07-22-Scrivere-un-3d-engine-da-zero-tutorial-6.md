@@ -1,6 +1,9 @@
 ---
 categories: [tutorials,3Dengine]
 tags: [tutorial, 3Dengine, p5js, builtfromscratch]
+image:
+  path: /assets/img/posts/3dengine/cover-6.jpg
+  alt: Triangoli, mesh e illuminazione in p5.js
 ---
 # Triangoli, Mesh e Illuminazione in p5.js
 

@@ -3,6 +3,9 @@ title: "Emiglio robot con radiocomando RC (Parte 1)"
 date: 2026-04-10 00:00:00 +0000
 categories: [tutorials, electronics]
 tags: [tutorial, blog, electronics, IoT, embedded]
+image:
+  path: /assets/img/posts/emiglio/radiocommm.png
+  alt: Emiglio smontato con il radiocomando RC e l'elettronica di controllo
 ---
 
 {% include embed/youtube.html id='oEHIA1CD1nk' %}

@@ -1,6 +1,9 @@
 ---
 categories: [tutorials,3Dengine]
 tags: [tutorial, 3Dengine, p5js, builtfromscratch]
+image:
+  path: /assets/img/posts/3dengine/cover-7.jpg
+  alt: Clipping dei triangoli in p5.js
 ---
 # Clipping dei Triangoli in p5.js
 

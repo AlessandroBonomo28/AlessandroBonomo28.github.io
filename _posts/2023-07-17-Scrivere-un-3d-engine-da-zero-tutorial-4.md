@@ -1,6 +1,9 @@
 ---
 categories: [tutorials,3Dengine]
 tags: [tutorial, 3Dengine, p5js, builtfromscratch]
+image:
+  path: /assets/img/posts/3dengine/cover-4.jpg
+  alt: Matrici di trasformazione in p5.js
 ---
 # Matrici di Trasformazione in p5.js
 

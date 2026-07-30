@@ -1,6 +1,9 @@
 ---
 categories: [tutorials,3Dengine]
 tags: [tutorial, 3Dengine, p5js, builtfromscratch]
+image:
+  path: /assets/img/posts/3dengine/cover-5.jpg
+  alt: Camera e navigazione 3D in p5.js
 ---
 # Camera e Navigazione 3D in p5.js - 3D Engine Tutorial 5
 

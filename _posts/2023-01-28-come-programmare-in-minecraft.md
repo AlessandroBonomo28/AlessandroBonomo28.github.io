@@ -1,6 +1,9 @@
 ---
 categories: [gamedev]
 tags: [lua, gamedev, builtfromscratch]
+image:
+  path: /assets/img/posts/luamine/m1.png
+  alt: Pong girato su un computer OpenComputers dentro Minecraft
 ---
 # Pong in Minecraft con OpenComputers mod
 
