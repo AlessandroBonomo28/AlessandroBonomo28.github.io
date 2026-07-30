@@ -84,17 +84,6 @@ Il display è un **TFT da 1,8 pollici, 128x160, controller ST7735S**, su un conn
 
 Il ricevitore infrarossi è un **TSOP4838**: è quello che riceve il telecomando, il metodo di controllo più comodo per fare le prove in casa. E poi ci sono gli **occhi a LED** di Emiglio, che sono la cosa meno utile e più importante di tutta la scheda.
 
-### Link componenti
-
-- [ESP32-WROOM-32E](https://amzn.to/3SuylLD)
-- [driver motori TB6612FNG](https://amzn.to/43Z6G8c)
-- [amplificatore I2S MAX98357A](https://amzn.to/4oQRt2t)
-- [display TFT ST7735 128x160](https://amzn.to/3R2ipQi)
-- [ricevitore IR TSOP4838](https://amzn.to/3SOVmZL)
-- [batterie NiMH ricaricabili](https://amzn.to/441fVVf)
-- PCB prodotto da **[PCBWay](https://www.pcbway.com/)**
-
-
 ### ATTENZIONE AL PACCO BATTERIE con da 12 V ha fatto il botto
 
 Volevo più coppia sui motori, così ho collegato un pacco da **12 V , 1A** al connettore della batteria. Scintilla, botto secco, odore inconfondibile: **C4** (ironico che il nome sia proprio c4), il condensatore da 47 µF sul rail dei motori, si è messo in corto credo.
