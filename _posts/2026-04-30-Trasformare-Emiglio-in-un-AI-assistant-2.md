@@ -5,7 +5,7 @@ categories: [tutorials, electronics]
 tags: [tutorial, blog, electronics, IoT, embedded]
 image:
   path: /assets/img/posts/emiglio/gem.png
-  alt: Architettura generale del sistema: Raspberry Pi Zero W2 satellite vocale e server con Home Assistant, Whisper, Piper, Ollama e SearXNG
+  alt: "Architettura generale del sistema: Raspberry Pi Zero W2 satellite vocale e server con Home Assistant, Whisper, Piper, Ollama e SearXNG"
 ---
 
 In questo articolo spiego come ho costruito un assistente vocale completamente self-hosted basato su [Home Assistant](https://www.home-assistant.io/), Wyoming Satellite su un **Raspberry Pi Zero W2** con microfono ReSpeaker 2-Mic, e un **server home assistant** con **Ollama** + **llama3-groq-tool-use** capace di fare ricerche web in tempo reale tramite **SearXNG**.
