@@ -1,6 +1,6 @@
 ---
 title: "Emiglio modchip, la scheda custom (Parte 5)"
-description: Ho progettato un PCB su misura per Emiglio con ESP32, motor driver, ampli I2S, display e ricevitore IR. Più il condensatore che è esploso e tutto quello che ho imparato.
+description: Ho progettato un PCB su misura per Emiglio con ESP32 e il nuovo sponsor PCBway!
 date: 2026-07-30 10:00:00 +0200
 categories: [tutorials, electronics]
 tags: [tutorial, blog, electronics, IoT, embedded, pcb, esp32]
