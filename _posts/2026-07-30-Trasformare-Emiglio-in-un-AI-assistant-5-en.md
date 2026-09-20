@@ -53,7 +53,7 @@ Saying thank you with a simple link didn't seem enough, so I did what an electro
 [![Desktop View](/assets/img/posts/emiglio-modchip/pcbway-display.jpg)](/assets/img/posts/emiglio-modchip/pcbway-display.jpg)
 _The PCBWay logo on the 1.8-inch display, with the modchip board connected via USB-C and the back panel with Emiglio's silkscreen_
 
-You can find it among [the sketches in the repo](#gli-sketch).
+You can find it among [the sketches in the repo](#the-sketches).
 
 ## What's on the board
 
@@ -132,7 +132,7 @@ All the firmware is in the project repo:
 
 Each folder is an autonomous Arduino sketch, designed to test one subsystem at a time: you flash one at a time, so when something goes wrong you know exactly where to look.
 
-- **[`test_motori_minimo`](https://github.com/AlessandroBonomo28/emiglio-modchip/tree/main/test_motori_minimo)** the main firmware. It drives the TB6612FNG with the IR remote (address `0x07`, and repressing the button of the ongoing maneuver causes a HALT) or from serial with `w s d a`, `x` for stop, `+`/`-` for duty, `i` for status. PWM at 20 kHz to stay out of the audible band, starting ramp at 8 steps, `STBY` held low until the end of initialization and decoding of the reset reason with dedicated diagnostics for brownout which is the function that made me understand the most things of all. **It's the sketch to use by default**, for the reason explained [above](#attenzione-al-pacco-batterie-con-da-12-v-ha-fatto-il-botto): all PWM writes go through a single function `pwmWrite()` that applies the `DUTY_MAX` clamp, so the limit cannot be broken by distraction.
+- **[`test_motori_minimo`](https://github.com/AlessandroBonomo28/emiglio-modchip/tree/main/test_motori_minimo)** the main firmware. It drives the TB6612FNG with the IR remote (address `0x07`, and repressing the button of the ongoing maneuver causes a HALT) or from serial with `w s d a`, `x` for stop, `+`/`-` for duty, `i` for status. PWM at 20 kHz to stay out of the audible band, starting ramp at 8 steps, `STBY` held low until the end of initialization and decoding of the reset reason with dedicated diagnostics for brownout which is the function that made me understand the most things of all. **It's the sketch to use by default**, for the reason explained [above](#watch-out-for-the-battery-pack-with-12-v-it-went-bang): all PWM writes go through a single function `pwmWrite()` that applies the `DUTY_MAX` clamp, so the limit cannot be broken by distraction.
 
 - **[`LcdModchip`](https://github.com/AlessandroBonomo28/emiglio-modchip/tree/main/LcdModchip)** display bring-up and calibration. It clears the entire **GRAM 132×162** (including non-visible edges) immediately after `initR()`, then applies `COLSTART=2 / ROWSTART=1` with a subclass that exposes the protected method `setColRowStart()`. Without those offsets the last row and the last column of the panel show random pixels. With `LCD_BORDER_TEST 1` it draws the calibration frame with the four colored corner pixels.
 
