@@ -16,7 +16,7 @@ image:
 
 {% include embed/youtube.html id='g96JaZwjHMA' %}
 
-In [Part 2](https://alessandrobonomo28.github.io/en/posts/Trasformare-Emiglio-in-un-AI-assistant-2/) we tried to make Emiglio smart by configuring a local AI assistant.
+In [Part 2](/en/posts/Trasformare-Emiglio-in-un-AI-assistant-2/) we tried to make Emiglio smart by configuring a local AI assistant.
 Today we see how to transform Emiglio into a bluetooth speaker so you can easily play audio by connecting with your phone.
 
 ![Desktop View](/assets/img/posts/emiglio/embluetooth.jpg){: width="auto"}

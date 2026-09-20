@@ -103,9 +103,9 @@ script_includes:
       {% if post.lang_ref == page.lang_ref and post.url != page.url %}
         <div class="post-meta text-muted mt-2 mb-3" style="font-size: 0.9rem;">
           {% if page.lang == 'it' %}
-            🇬🇧 <a href="{{ post.url }}">Read in English</a>
+            🇬🇧 <a href="{{ post.url | relative_url }}">Read in English</a>
           {% else %}
-            🇮🇹 <a href="{{ post.url }}">Leggi in italiano</a>
+            🇮🇹 <a href="{{ post.url | relative_url }}">Leggi in italiano</a>
           {% endif %}
         </div>
         {% break %}

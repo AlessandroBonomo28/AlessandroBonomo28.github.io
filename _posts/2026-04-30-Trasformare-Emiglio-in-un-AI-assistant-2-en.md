@@ -506,4 +506,4 @@ We have configured a local AI assistant with websearch that we can query locally
 
 ### Part 3
 
-In part 3 we see how to configure Emiglio as a bluetooth speaker to connect directly with the phone and play audio (without writing code). [Click here to read part 3](https://alessandrobonomo28.github.io/en/posts/Trasformare-Emiglio-in-un-AI-assistant-3/)
+In part 3 we see how to configure Emiglio as a bluetooth speaker to connect directly with the phone and play audio (without writing code). [Click here to read part 3](/en/posts/Trasformare-Emiglio-in-un-AI-assistant-3/)

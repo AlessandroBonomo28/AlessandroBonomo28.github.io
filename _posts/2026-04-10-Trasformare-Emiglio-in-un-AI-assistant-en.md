@@ -68,4 +68,4 @@ I also drilled some holes with a Dremel on the back of Emiglio to let out a Powe
 
 ### Part 2
 
-In part 2 we see how to use a raspberry pi W2 and a respeaker module to interact vocally with Emiglio. [Click here to read part 2](https://alessandrobonomo28.github.io/en/posts/Trasformare-Emiglio-in-un-AI-assistant-2/)
+In part 2 we see how to use a raspberry pi W2 and a respeaker module to interact vocally with Emiglio. [Click here to read part 2](/en/posts/Trasformare-Emiglio-in-un-AI-assistant-2/)
