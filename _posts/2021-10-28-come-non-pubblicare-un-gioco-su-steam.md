@@ -1,4 +1,6 @@
 ---
+lang: it
+lang_ref: steam-game
 categories: [gamedev]
 tags: [gamedev,games, builtfromscratch]
 image:

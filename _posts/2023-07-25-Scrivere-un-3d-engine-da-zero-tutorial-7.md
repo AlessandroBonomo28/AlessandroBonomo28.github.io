@@ -1,4 +1,6 @@
 ---
+lang: it
+lang_ref: 3d-engine-7
 categories: [tutorials,3Dengine]
 tags: [tutorial, 3Dengine, p5js, builtfromscratch]
 image:

@@ -1,4 +1,6 @@
 ---
+lang: it
+lang_ref: booking-desk
 title: "Una receptionist IA full duplex che prenota appuntamenti (e non inventa niente)"
 description: Ho costruito un banco prenotazioni vocale con MiniCPM-o 4.5 che ascolta e parla insieme, legge uno schermo come contesto e scrive sul database solo quando il cliente dice sì.
 date: 2026-09-17 10:00:00 +0200

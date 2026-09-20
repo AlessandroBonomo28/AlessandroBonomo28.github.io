@@ -1,4 +1,6 @@
 ---
+lang: it
+lang_ref: emiglio-1
 title: "Emiglio robot con radiocomando RC (Parte 1)"
 date: 2026-04-10 00:00:00 +0000
 categories: [tutorials, electronics]

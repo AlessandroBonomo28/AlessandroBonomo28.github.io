@@ -1,4 +1,6 @@
 ---
+lang: it
+lang_ref: msdos-pong
 categories: [gamedev]
 tags: [assembly, gamedev, builtfromscratch]
 image:

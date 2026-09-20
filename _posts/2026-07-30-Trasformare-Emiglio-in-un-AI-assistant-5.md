@@ -1,4 +1,6 @@
 ---
+lang: it
+lang_ref: emiglio-5
 title: "Emiglio modchip, la scheda custom (Parte 5)"
 description: Ho progettato un PCB su misura per Emiglio con ESP32 e il nuovo sponsor PCBway!
 date: 2026-07-30 10:00:00 +0200

@@ -1,4 +1,6 @@
 ---
+lang: it
+lang_ref: emiglio-6
 title: "Emiglio vede, ascolta e parla in tempo reale (Parte 6)"
 description: Emiglio trasmette video e audio dal Raspberry Pi a MiniCPM-o 4.5 in full duplex, e la conversazione non si pianta più dopo pochi minuti.
 date: 2026-09-16 10:00:00 +0200

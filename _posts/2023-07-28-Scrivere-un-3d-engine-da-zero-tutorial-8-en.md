@@ -1,25 +1,27 @@
 ---
-lang: it
+lang: en
+hidden: true
 lang_ref: 3d-engine-8
+permalink: /en/posts/Scrivere-un-3d-engine-da-zero-tutorial-8/
 categories: [tutorials,3Dengine]
 tags: [tutorial, 3Dengine, p5js, builtfromscratch]
 image:
   path: /assets/img/posts/3dengine/cover-8.jpg
-  alt: Importare modelli 3D in formato OBJ in p5.js
+  alt: Importing 3D models in OBJ format in p5.js
 ---
-# Importare Modelli 3D (OBJ) in p5.js
+# Importing 3D Models (OBJ) in p5.js
 
 {% include embed/youtube.html id='YTYGDXST2cA' %}
 
-## Cosa Facciamo
+## What We're Doing
 
-In questo tutorial finale portiamo il nostro motore 3D al livello successivo: importiamo **modelli 3D reali** nel formato OBJ! Creiamo un parser che legge file .obj e li converte in triangoli renderizzabili dal nostro engine. Ora possiamo caricare qualsiasi modello 3D!
+In this final tutorial we take our 3D engine to the next level: we import **real 3D models** in OBJ format! We create a parser that reads .obj files and converts them into triangles renderable by our engine. Now we can load any 3D model!
 
-## I Due Script
+## The Two Scripts
 
-### objImporter.js - Il Parser
+### objImporter.js - The Parser
 
-Questo script definisce una classe che legge e interpreta file OBJ.
+This script defines a class that reads and interprets OBJ files.
 
 ```javascript
 class ObjImporter {
@@ -44,12 +46,12 @@ class ObjImporter {
   }
 ```
 
-Nel costruttore:
-- Creiamo un input per selezionare file
-- Usiamo `FileReader` per leggere il file come testo
-- Quando il file è caricato, lo passiamo al parser
+In the constructor:
+- We create an input to select files
+- We use `FileReader` to read the file as text
+- When the file is loaded, we pass it to the parser
 
-### Parsing dei Dati
+### Data Parsing
 
 ```javascript
   parseData(data) {
@@ -65,9 +67,9 @@ Nel costruttore:
   }
 ```
 
-Dividiamo il file OBJ in righe (separate da `\n`) e processiamo ogni riga.
+We divide the OBJ file into lines (separated by `\n`) and process each line.
 
-### Parsing dei Vertici
+### Vertex Parsing
 
 ```javascript
   parseVertex(data) {
@@ -76,9 +78,9 @@ Dividiamo il file OBJ in righe (separate da `\n`) e processiamo ogni riga.
   }
 ```
 
-Una riga tipo `v 1.0 0.5 -0.3` definisce un vertice. Separiamo per spazi e salviamo le coordinate nell'array `vertici`.
+A line like `v 1.0 0.5 -0.3` defines a vertex. We split by spaces and save the coordinates in the `vertici` array.
 
-### Parsing delle Facce
+### Face Parsing
 
 ```javascript
   parseFace(data) {
@@ -98,12 +100,12 @@ Una riga tipo `v 1.0 0.5 -0.3` definisce un vertice. Separiamo per spazi e salvi
   }
 ```
 
-Una riga tipo `f 1 2 3` o `f 1/1/1 2/2/2 3/3/3` definisce una faccia (triangolo).
-- I numeri si riferiscono agli indici dei vertici (base-1)
-- Se c'è `/`, prendiamo solo il primo numero (indice vertice)
-- Recuperiamo le coordinate dai vertici salvati e creiamo un triangolo
+A line like `f 1 2 3` or `f 1/1/1 2/2/2 3/3/3` defines a face (triangle).
+- The numbers refer to the vertex indices (base-1)
+- If there is a `/`, we take only the first number (vertex index)
+- We retrieve the coordinates from the saved vertices and create a triangle
 
-### Identificazione delle Righe
+### Line Identification
 
 ```javascript
   parseLine(lineData) {
@@ -116,17 +118,17 @@ Una riga tipo `f 1 2 3` o `f 1/1/1 2/2/2 3/3/3` definisce una faccia (triangolo)
 }
 ```
 
-Ogni riga OBJ inizia con un prefisso:
-- `v` → vertice (coordinate x,y,z)
-- `vn` → normale (ignorata)
-- `vt` → texture coordinate (ignorata)
-- `f` → faccia (triangolo)
+Each OBJ line starts with a prefix:
+- `v` → vertex (x,y,z coordinates)
+- `vn` → normal (ignored)
+- `vt` → texture coordinate (ignored)
+- `f` → face (triangle)
 
-Processiamo solo `v` e `f`.
+We only process `v` and `f`.
 
-### sketch.js - Il Rendering
+### sketch.js - The Rendering
 
-Il file principale ora usa l'importer invece di triangoli hardcoded:
+The main file now uses the importer instead of hardcoded triangles:
 
 ```javascript
 let triangles = [];
@@ -149,9 +151,9 @@ function draw() {
 }
 ```
 
-Quando `objImporter.importDone` è true, copiamo i triangoli importati nell'array `triangles` e il nostro engine li renderizza!
+When `objImporter.importDone` is true, we copy the imported triangles into the `triangles` array and our engine renders them!
 
-### Controlli Extra
+### Extra Controls
 
 ```javascript
 function keyPressed() {
@@ -164,11 +166,11 @@ function keyPressed() {
 }
 ```
 
-Premendo **H** possiamo nascondere i punti e i bordi dei triangoli per vedere solo le facce solide.
+By pressing **H** we can hide the points and edges of the triangles to see only the solid faces.
 
-## Il Formato OBJ
+## The OBJ Format
 
-Un file OBJ è un formato testo semplice:
+An OBJ file is a plain text format:
 
 ```
 # Commento
@@ -178,32 +180,32 @@ v 0.5 1.0 0.0
 f 1 2 3
 ```
 
-- `v x y z` → definisce un vertice
-- `f i1 i2 i3` → definisce un triangolo usando gli indici dei vertici
-- Gli indici partono da 1 (non da 0!)
+- `v x y z` → defines a vertex
+- `f i1 i2 i3` → defines a triangle using vertex indices
+- Indices start from 1 (not 0!)
 
-Formati più complessi possono includere:
-- `f 1/1/1 2/2/2 3/3/3` → vertice/texture/normale
-- Facce con 4+ vertici (quad) → il nostro parser li considera come un solo "triangolo" che verrà poi gestito dal clipping
+More complex formats can include:
+- `f 1/1/1 2/2/2 3/3/3` → vertex/texture/normal
+- Faces with 4+ vertices (quads) → our parser considers them as a single \"triangle\" which will then be handled by clipping
 
-## Pipeline Completa
+## Complete Pipeline
 
-1. **Upload**: l'utente seleziona un file .obj
-2. **Parsing**: `ObjImporter` legge vertici e facce
-3. **Conversione**: i dati OBJ diventano array di triangoli
-4. **Rendering**: il nostro engine 3D renderizza i triangoli con:
-   - Trasformazioni (rotazione, scala, traslazione)
+1. **Upload**: the user selects an .obj file
+2. **Parsing**: `ObjImporter` reads vertices and faces
+3. **Conversion**: OBJ data becomes an array of triangles
+4. **Rendering**: our 3D engine renders the triangles with:
+   - Transformations (rotation, scale, translation)
    - Back-face culling
-   - Illuminazione
+   - Lighting
    - Clipping
-   - Proiezione prospettica
+   - Perspective projection
    - Painter's algorithm
 
-## Concetti Chiave
+## Key Concepts
 
 ### File Reader API
 
-JavaScript può leggere file locali usando `FileReader`:
+JavaScript can read local files using `FileReader`:
 ```javascript
 const reader = new FileReader();
 reader.onload = e => {
@@ -213,36 +215,36 @@ reader.onload = e => {
 reader.readAsText(file);
 ```
 
-### Indicizzazione Vertici
+### Vertex Indexing
 
-Invece di duplicare coordinate, OBJ usa **indici**:
-- I vertici sono definiti una volta
-- Le facce referenziano i vertici per indice
-- Risparmia spazio e memoria
+Instead of duplicating coordinates, OBJ uses **indices**:
+- Vertices are defined once
+- Faces reference vertices by index
+- Saves space and memory
 
-### Triangolazione
+### Triangulation
 
-Molti modelli hanno quad (4 vertici). Il nostro parser li tratta come array più lunghi che il sistema di clipping può poi gestire.
+Many models have quads (4 vertices). Our parser treats them as longer arrays that the clipping system can then handle.
 
-## Provalo
+## Try It Out
 
-1. Vai su [editor.p5js.org](https://editor.p5js.org/)
-2. Crea due file: `sketch.js` e `objImporter.js`
-3. Copia il codice in entrambi i file
-4. Scarica un modello .obj semplice (es. da [qui](https://github.com/AlessandroBonomo28/Elegoo-TouchScreen-2.8-GFX-fun/tree/base/p5%20js%20testing/youtube/obj%20files))
-5. Premi play e seleziona il file .obj
-6. Guarda il tuo modello renderizzato in 3D!
+1. Go to [editor.p5js.org](https://editor.p5js.org/)
+2. Create two files: `sketch.js` and `objImporter.js`
+3. Copy the code into both files
+4. Download a simple .obj model (e.g. from [here](https://github.com/AlessandroBonomo28/Elegoo-TouchScreen-2.8-GFX-fun/tree/base/p5%20js%20testing/youtube/obj%20files))
+5. Press play and select the .obj file
+6. Watch your 3D model rendered in 3D!
 
-Controlli:
-- **WASD** → movimento
-- **Mouse drag** → guarda in giro
-- **Spazio/Shift** → su/giù
-- **H** → nascondi/mostra wireframe
-- **T** → mostra/nascondi coordinate
+Controls:
+- **WASD** → movement
+- **Mouse drag** → look around
+- **Space/Shift** → up/down
+- **H** → hide/show wireframe
+- **T** → show/hide coordinates
 
-### Il codice intero
+### The full code
 
-Ecco qui `objImporter.js`:
+Here is `objImporter.js`:
 
 ```javascript
 class ObjImporter{
@@ -306,7 +308,7 @@ class ObjImporter{
 }
 ```
 
-Ecco qui `sketch.js`:
+Here is `sketch.js`:
 
 ```javascript
 const zNear= 0.1;

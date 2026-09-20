@@ -1,0 +1,9 @@
+<!-- hreflang tags for multilingual SEO -->
+{% if page.lang_ref %}
+  {% for post in site.posts %}
+    {% if post.lang_ref == page.lang_ref and post.url != page.url %}
+      <link rel="alternate" hreflang="{{ post.lang | default: site.lang }}" href="{{ post.url | absolute_url }}" />
+    {% endif %}
+  {% endfor %}
+  <link rel="alternate" hreflang="{{ page.lang | default: site.lang }}" href="{{ page.url | absolute_url }}" />
+{% endif %}

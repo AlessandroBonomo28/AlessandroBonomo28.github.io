@@ -1,32 +1,34 @@
 ---
-lang: it
+lang: en
+hidden: true
 lang_ref: 3d-engine-1
+permalink: /en/posts/Scrivere-un-3D-engine-da-zero-tutorial-1/
 categories: [tutorials,3Dengine]
 tags: [tutorial, 3Dengine, p5js, builtfromscratch]
 image:
   path: /assets/img/posts/3dengine/cover-1.jpg
-  alt: Introduzione a p5.js
+  alt: Introduction to p5.js
 ---
-# Primi Passi con p5.js: Cerchi che Cadono
+# First Steps with p5.js: Falling Circles
 
 {% include embed/youtube.html id='zucCXzZ3UCA' %}
 
-## Cos'è p5.js?
+## What is p5.js?
 
-p5.js è una libreria JavaScript per creare grafica e animazioni interattive. È perfetta per chi vuole programmare in modo creativo senza troppa complessità. Se vai su [editor.p5js.org](https://editor.p5js.org/) puoi usarla online senza dover scaricare nulla.
+p5.js is a JavaScript library for creating interactive graphics and animations. It is perfect for those who want to code creatively without too much complexity. If you go to [editor.p5js.org](https://editor.p5js.org/) you can use it online without having to download anything.
 
-## Come Funziona
+## How it Works
 
-Ogni progetto p5.js usa due funzioni base:
+Each p5.js project uses two basic functions:
 
-- **`setup()`** - si esegue una volta all'inizio
-- **`draw()`** - si ripete in loop (circa 60 volte al secondo)
+- **`setup()`** - runs once at the beginning
+- **`draw()`** - repeats in a loop (about 60 times per second)
 
-## Il Nostro Progetto
+## Our Project
 
-In questo tutorial creiamo un'animazione semplice: ogni click del mouse genera un cerchio giallo che cade verso il basso.
+In this tutorial we create a simple animation: each mouse click generates a yellow circle that falls downwards.
 
-### Il Codice Spiegato
+### The Code Explained
 
 ```javascript
 const raggio = 20;
@@ -35,7 +37,7 @@ let x = 0, y = 0;
 let circles = [];
 ```
 
-Definiamo il raggio dei cerchi, la velocità di caduta e un array per memorizzare tutti i cerchi creati.
+We define the radius of the circles, the falling speed and an array to store all created circles.
 
 ```javascript
 function setup() {
@@ -43,7 +45,7 @@ function setup() {
 }
 ```
 
-Creiamo un canvas di 400×400 pixel.
+We create a 400x400 pixel canvas.
 
 ```javascript
 function draw() {
@@ -56,7 +58,7 @@ function draw() {
   point(x, y);
 ```
 
-Ogni frame disegniamo uno sfondo verde e un punto che segue il cursore del mouse.
+Every frame we draw a green background and a point that follows the mouse cursor.
 
 ```javascript
   fill(255, 255, 0);
@@ -71,7 +73,7 @@ Ogni frame disegniamo uno sfondo verde e un punto che segue il cursore del mouse
 }
 ```
 
-Disegniamo tutti i cerchi gialli, li facciamo cadere e quando escono dal canvas li riportiamo in alto.
+We draw all the yellow circles, we make them fall and when they go out of the canvas we bring them back to the top.
 
 ```javascript
 function mouseClicked() {
@@ -79,7 +81,7 @@ function mouseClicked() {
 }
 ```
 
-Ogni click crea un nuovo cerchio.
+Each click creates a new circle.
 
 ```javascript
 function keyPressed() {
@@ -89,11 +91,11 @@ function keyPressed() {
 }
 ```
 
-Premendo 'r' cancelliamo tutti i cerchi.
+Pressing 'r' we delete all circles.
 
-## Provalo Subito
+## Try It Now
 
-Vai su [editor.p5js.org](https://editor.p5js.org/), copia il codice e premi play
+Go to [editor.p5js.org](https://editor.p5js.org/), copy the code and hit play
 
 ```javascript
 const raggio  =20;

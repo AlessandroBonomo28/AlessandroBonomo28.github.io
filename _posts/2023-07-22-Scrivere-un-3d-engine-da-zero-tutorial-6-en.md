@@ -1,23 +1,25 @@
 ---
-lang: it
+lang: en
+hidden: true
 lang_ref: 3d-engine-6
+permalink: /en/posts/Scrivere-un-3d-engine-da-zero-tutorial-6/
 categories: [tutorials,3Dengine]
 tags: [tutorial, 3Dengine, p5js, builtfromscratch]
 image:
   path: /assets/img/posts/3dengine/cover-6.jpg
-  alt: Triangoli, mesh e illuminazione in p5.js
+  alt: Triangles, meshes and lighting in p5.js
 ---
-# Triangoli, Mesh e Illuminazione in p5.js
+# Triangles, Meshes and Lighting in p5.js
 
 {% include embed/youtube.html id='B7SVOkmW7lo' %}
 
-## Cosa Facciamo
+## What We're Doing
 
-In questo tutorial passiamo dai punti ai **triangoli**! Costruiamo un cubo fatto di facce triangolari, calcoliamo le normali per il **back-face culling**, implementiamo l'**illuminazione direzionale**, e ordiniamo i triangoli per profondità. Il risultato è un vero rendering 3D!
+In this tutorial we move from points to **triangles**! We build a cube made of triangular faces, calculate the normals for **back-face culling**, implement **directional lighting**, and sort the triangles by depth. The result is real 3D rendering!
 
-## Il Codice Spiegato
+## The Code Explained
 
-### Definizione dei Triangoli
+### Triangle Definition
 
 ```javascript
 let triangles = [
@@ -33,17 +35,17 @@ let triangles = [
 ];
 ```
 
-Ogni faccia del cubo è divisa in 2 triangoli. Ogni triangolo ha 3 vertici con coordinate [x, y, z] in ordine **orario** (clockwise). L'ordine è importante per calcolare la normale!
+Each face of the cube is divided into 2 triangles. Each triangle has 3 vertices with [x, y, z] coordinates in **clockwise** order. The order is important to calculate the normal!
 
-### Direzione della Luce
+### Light Direction
 
 ```javascript
 let lightDirection = [0, 0, 1];
 ```
 
-Vettore che indica da dove viene la luce (in questo caso dall'asse Z positivo).
+Vector that indicates where the light comes from (in this case from the positive Z axis).
 
-### Funzioni Vettoriali
+### Vector Functions
 
 ```javascript
 function sub(v1, v2) {
@@ -55,10 +57,10 @@ function dotProduct(v1, v2) {
 }
 ```
 
-- **Sottrazione**: calcola il vettore da v2 a v1
-- **Dot product** (prodotto scalare): misura quanto due vettori puntano nella stessa direzione
+- **Subtraction**: calculates the vector from v2 to v1
+- **Dot product**: measures how much two vectors point in the same direction
 
-### Il Loop Principale
+### The Main Loop
 
 ```javascript
 function draw() {
@@ -81,9 +83,9 @@ function draw() {
     }
 ```
 
-Estraiamo i 3 vertici da ogni triangolo e applichiamo le trasformazioni. `triWorldSpace` contiene ora [x1,y1,z1, x2,y2,z2, x3,y3,z3].
+We extract the 3 vertices from each triangle and apply the transformations. `triWorldSpace` now contains [x1,y1,z1, x2,y2,z2, x3,y3,z3].
 
-### Calcolo della Normale
+### Normal Calculation
 
 ```javascript
     const v1 = [triWorldSpace[0], triWorldSpace[1], triWorldSpace[2]];
@@ -94,7 +96,7 @@ Estraiamo i 3 vertici da ogni triangolo e applichiamo le trasformazioni. `triWor
     triNormal = vec3normalize(triNormal);
 ```
 
-La **normale** è un vettore perpendicolare al triangolo. Si calcola con il prodotto vettoriale di due lati del triangolo. Indica "verso dove guarda" la faccia.
+The **normal** is a vector perpendicular to the triangle. It is calculated with the cross product of two sides of the triangle. It indicates \"where the face is looking\".
 
 ### Back-Face Culling
 
@@ -105,20 +107,20 @@ La **normale** è un vettore perpendicolare al triangolo. Si calcola con il prod
     if(visible > 0) continue; // triangolo non visibile
 ```
 
-Se la normale del triangolo punta **lontano** dalla camera, il triangolo è invisibile (stiamo guardando il "retro"). Con il dot product verifichiamo l'angolo: se > 90°, skippiamo il triangolo. Questo ottimizza il rendering!
+If the triangle's normal points **away** from the camera, the triangle is invisible (we are looking at the \"back\"). With the dot product we verify the angle: if > 90°, we skip the triangle. This optimizes rendering!
 
-### Calcolo dell'Illuminazione
+### Lighting Calculation
 
 ```javascript
     const shading = -dotProduct(lightDirection, triNormal);
 ```
 
-Il dot product tra direzione della luce e normale ci dice quanto il triangolo è illuminato:
-- Paralleli (dot = 1) → massima illuminazione
-- Perpendicolari (dot = 0) → ombra
-- Opposti (dot = -1) → completamente in ombra
+The dot product between light direction and normal tells us how illuminated the triangle is:
+- Parallel (dot = 1) → maximum illumination
+- Perpendicular (dot = 0) → shadow
+- Opposite (dot = -1) → completely in shadow
 
-### Trasformazione View e Proiezione
+### View Transformation and Projection
 
 ```javascript
     let triViewSpace = [];
@@ -134,7 +136,7 @@ Il dot product tra direzione della luce e normale ci dice quanto il triangolo è
     }
 ```
 
-Applichiamo la matrice view per trasformare dal mondo allo spazio della camera.
+We apply the view matrix to transform from world to camera space.
 
 ```javascript
     let triScreenSpace = [];
@@ -166,7 +168,7 @@ Applichiamo la matrice view per trasformare dal mondo allo spazio della camera.
   }
 ```
 
-Proiettiamo i vertici sullo schermo e salviamo anche lo shading.
+We project the vertices on the screen and also save the shading.
 
 ### Painter's Algorithm
 
@@ -182,9 +184,9 @@ Proiettiamo i vertici sullo schermo e salviamo anche lo shading.
   projected_triangles.sort(compareZDepth);
 ```
 
-Ordiniamo i triangoli per profondità media (Z). Disegniamo prima quelli più lontani, poi quelli più vicini. Questo risolve (parzialmente) il problema dell'occlusione.
+We sort the triangles by average depth (Z). We draw the furthest ones first, then the closest ones. This (partially) solves the occlusion problem.
 
-### Rendering dei Triangoli
+### Triangle Rendering
 
 ```javascript
   for(let i = 0; i < projected_triangles.length; i++) {
@@ -202,38 +204,38 @@ Ordiniamo i triangoli per profondità media (Z). Disegniamo prima quelli più lo
   }
 ```
 
-Disegniamo ogni triangolo con un colore basato sullo shading:
-- Shading alto → bianco (ben illuminato)
-- Shading basso → grigio scuro (in ombra)
-- Minimo 0.15 per avere sempre un po' di luce ambientale
+We draw each triangle with a color based on its shading:
+- High shading → white (well lit)
+- Low shading → dark gray (in shadow)
+- Minimum 0.15 to always have a bit of ambient light
 
-## Concetti Chiave
+## Key Concepts
 
-### Pipeline di Rendering Completa
+### Complete Rendering Pipeline
 
-1. **Spazio Locale** → vertici del cubo originale
-2. **Spazio Mondo** → dopo trasformazioni (scala, rotazione, traslazione)
-3. **Calcolo Normali** → per back-face culling e illuminazione
-4. **Spazio View** → dal punto di vista della camera
-5. **Spazio Schermo** → dopo proiezione prospettica
-6. **Sorting** → ordina per profondità
-7. **Rasterizzazione** → disegna i triangoli
+1. **Local Space** → vertices of the original cube
+2. **World Space** → after transformations (scale, rotation, translation)
+3. **Normal Calculation** → for back-face culling and lighting
+4. **View Space** → from the camera's point of view
+5. **Screen Space** → after perspective projection
+6. **Sorting** → sort by depth
+7. **Rasterization** → draw the triangles
 
 ### Back-Face Culling
 
-Ottimizzazione: non disegniamo le facce che guardano lontano dalla camera. Dimezza il numero di triangoli da renderizzare!
+Optimization: we don't draw faces that look away from the camera. Halves the number of triangles to render!
 
-### Illuminazione Diffusa
+### Diffuse Lighting
 
-Il modello più semplice di illuminazione. L'intensità dipende dall'angolo tra luce e normale (Legge di Lambert).
+The simplest lighting model. The intensity depends on the angle between light and normal (Lambert's Law).
 
 ### Painter's Algorithm
 
-Disegna gli oggetti dall'indietro verso davanti. Semplice ma non perfetto (può fallire con triangoli intersecanti).
+Draws objects from back to front. Simple but not perfect (can fail with intersecting triangles).
 
-## Provalo
+## Try It Out
 
-Vai su [editor.p5js.org](https://editor.p5js.org/) e osserva il cubo illuminato che ruota! Nota come le facce cambiano luminosità in base all'orientamento rispetto alla luce.
+Go to [editor.p5js.org](https://editor.p5js.org/) and watch the illuminated cube rotate! Note how the faces change brightness based on their orientation to the light.
 
 ```javascript
 const zNear= 0.1;

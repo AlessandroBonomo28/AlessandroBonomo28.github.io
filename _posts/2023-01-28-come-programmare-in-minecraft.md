@@ -1,4 +1,6 @@
 ---
+lang: it
+lang_ref: minecraft-pong
 categories: [gamedev]
 tags: [lua, gamedev, builtfromscratch]
 image:

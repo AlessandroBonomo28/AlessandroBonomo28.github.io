@@ -1,317 +1,248 @@
 ---
-lang: it
-lang_ref: 3d-engine-8
+lang: en
+hidden: true
+lang_ref: 3d-engine-7
+permalink: /en/posts/Scrivere-un-3d-engine-da-zero-tutorial-7/
 categories: [tutorials,3Dengine]
 tags: [tutorial, 3Dengine, p5js, builtfromscratch]
 image:
-  path: /assets/img/posts/3dengine/cover-8.jpg
-  alt: Importare modelli 3D in formato OBJ in p5.js
+  path: /assets/img/posts/3dengine/cover-7.jpg
+  alt: Triangle clipping in p5.js
 ---
-# Importare Modelli 3D (OBJ) in p5.js
+# Triangle Clipping in p5.js
 
-{% include embed/youtube.html id='YTYGDXST2cA' %}
+{% include embed/youtube.html id='4SXWeJYTCu0' %}
 
-## Cosa Facciamo
+## What We're Doing
 
-In questo tutorial finale portiamo il nostro motore 3D al livello successivo: importiamo **modelli 3D reali** nel formato OBJ! Creiamo un parser che legge file .obj e li converte in triangoli renderizzabili dal nostro engine. Ora possiamo caricare qualsiasi modello 3D!
+In this tutorial we solve one of the most complex problems in 3D graphics: **clipping**! When a triangle partially exits the screen or crosses the camera's near plane, we must \"cut\" it and create new triangles. Without clipping, triangles deform or disappear incorrectly.
 
-## I Due Script
+## The Code Explained
 
-### objImporter.js - Il Parser
-
-Questo script definisce una classe che legge e interpreta file OBJ.
+### Basic Geometric Functions
 
 ```javascript
-class ObjImporter {
-  constructor() {
-    this.importDone = false;
-    this.triangoli = [];
-    this.vertici = [];
+function isAboveOrOntoPlane(v, planePoint, planeNormal) {
+  planeNormal = vec3normalize(planeNormal);
+  const d1 = dotProduct(v, planeNormal);
+  const d2 = dotProduct(planePoint, planeNormal);
+  return (d1 - d2) >= 0;
+}
+```
+
+Checks if a point is above (or on) a plane. A plane is defined by:
+- A point on the plane (`planePoint`)
+- The normal (perpendicular) to the plane (`planeNormal`)
+
+Uses the dot product to calculate the signed distance from the plane.
+
+### Plane Intersection
+
+```javascript
+function interceptPlane(vOrigin, vDirection, planePoint, planeNormal) {
+  planeNormal = vec3normalize(planeNormal);
+  vDirection = vec3normalize(vDirection);
+  
+  const dot1 = dotProduct(sub(planePoint, vOrigin), planeNormal);
+  const dot2 = dotProduct(vDirection, planeNormal);
+  
+  if(dot1 == 0 && dot2 == 0) return vOrigin;
+  else if(dot1 != 0 && dot2 == 0) return 'impossible';
+  
+  const t = dot1 / dot2;
+  
+  return [vOrigin[0] + vDirection[0] * t,
+          vOrigin[1] + vDirection[1] * t,
+          vOrigin[2] + vDirection[2] * t];
+}
+```
+
+Calculates where a line (from `vOrigin` in the direction `vDirection`) intersects a plane. Uses the parametric line equation: `P = vOrigin + t * vDirection`.
+
+### Clipping a Triangle
+
+```javascript
+function clipAgainstPlane(triToClip, planePoint, planeNormalTowardsInside) {
+  let insideCount = 0;
+  let outsideVertexes = [];
+  let insideVertexes = [];
+  
+  // Classifica ogni vertice: dentro o fuori?
+  for(let i = 0; i < 3; i++) {
+    let x = triToClip[i * 3];
+    let y = triToClip[i * 3 + 1];
+    let z = triToClip[i * 3 + 2];
     
-    let fileInput = createFileInput(file => {
-      const reader = new FileReader();
-      reader.onload = e => {
-        const data = e.target.result;
-        this.importDone = false;
-        this.triangoli = [];
-        this.vertici = [];
-        this.parseData(data);
-        this.importDone = true;
-        print(this.triangoli.length + " triangles imported.");
-      };
-      reader.readAsText(file.file);
-    });
-  }
-```
-
-Nel costruttore:
-- Creiamo un input per selezionare file
-- Usiamo `FileReader` per leggere il file come testo
-- Quando il file è caricato, lo passiamo al parser
-
-### Parsing dei Dati
-
-```javascript
-  parseData(data) {
-    let inputStr = data;
-    let charK = '\n';
-    let i = 0, j = 0;
-
-    while ((j = inputStr.indexOf(charK, i)) !== -1) {
-      this.parseLine(inputStr.substring(i, j));
-      i = j + 1;
-    }
-    this.parseLine(inputStr.substring(i));
-  }
-```
-
-Dividiamo il file OBJ in righe (separate da `\n`) e processiamo ogni riga.
-
-### Parsing dei Vertici
-
-```javascript
-  parseVertex(data) {
-    let splitted = data.split(' ');
-    this.vertici.push(splitted);
-  }
-```
-
-Una riga tipo `v 1.0 0.5 -0.3` definisce un vertice. Separiamo per spazi e salviamo le coordinate nell'array `vertici`.
-
-### Parsing delle Facce
-
-```javascript
-  parseFace(data) {
-    let splitted = data.split(' ');
-    let triRead = [];
+    const isInside = isAboveOrOntoPlane([x,y,z], planePoint, planeNormalTowardsInside);
     
-    for(let i = 0; i < splitted.length; i++) {
-      if(splitted[i].includes('/')) {
-        let slashSplit = splitted[i].split('/');
-        triRead = [...triRead, ...this.vertici[slashSplit[0]-1]];
-      } else {
-        triRead = [...triRead, ...this.vertici[splitted[i]-1]];
-      }
+    if(isInside) {
+      insideCount++;
+      insideVertexes = [[x,y,z], ...insideVertexes];
+    } else {
+      outsideVertexes = [[x,y,z], ...outsideVertexes];
     }
+  }
+```
+
+First we classify each vertex of the triangle: is it inside or outside the plane??
+
+#### Case 1: All Outside (insideCount = 0)
+
+```javascript
+  if(insideCount == 0) return [];
+```
+
+The triangle is completely outside → we remove it.
+
+#### Case 2: All Inside (insideCount = 3)
+
+```javascript
+  if(insideCount == 3) return [triToClip];
+```
+
+The triangle is completely inside → we keep it as it is.
+
+#### Case 3: One Vertex Inside (insideCount = 1)
+
+```javascript
+  if(insideCount == 1) {
+    const dir1 = sub(outsideVertexes[0], insideVertexes[0]);
+    const dir2 = sub(outsideVertexes[1], insideVertexes[0]);
     
-    this.triangoli.push(triRead);
+    const intercept1 = interceptPlane(outsideVertexes[0], dir1, planePoint, planeNormalTowardsInside);
+    const intercept2 = interceptPlane(outsideVertexes[1], dir2, planePoint, planeNormalTowardsInside);
+    
+    const newTri = [...insideVertexes[0], ...intercept1, ...intercept2];
+    return [newTri];
   }
 ```
 
-Una riga tipo `f 1 2 3` o `f 1/1/1 2/2/2 3/3/3` definisce una faccia (triangolo).
-- I numeri si riferiscono agli indici dei vertici (base-1)
-- Se c'è `/`, prendiamo solo il primo numero (indice vertice)
-- Recuperiamo le coordinate dai vertici salvati e creiamo un triangolo
+Two vertices outside, one inside → we create a **smaller triangle**:
+- We keep the inner vertex
+- We find where the two sides intersect the plane
+- We create a new triangle with these three points
 
-### Identificazione delle Righe
+#### Case 4: Two Vertices Inside (insideCount = 2)
 
 ```javascript
-  parseLine(lineData) {
-    if(lineData[0] == 'v' && lineData[1] != 'n' && lineData[1] != 't') {
-      this.parseVertex(lineData.substring(2));
-    } else if(lineData[0] == 'f') {
-      this.parseFace(lineData.substring(2));
-    }
+  else {
+    const dir1 = sub(outsideVertexes[0], insideVertexes[0]);
+    const dir2 = sub(outsideVertexes[0], insideVertexes[1]);
+    
+    const intercept1 = interceptPlane(outsideVertexes[0], dir1, planePoint, planeNormalTowardsInside);
+    const intercept2 = interceptPlane(outsideVertexes[0], dir2, planePoint, planeNormalTowardsInside);
+    
+    const tri1 = [...insideVertexes[0], ...insideVertexes[1], ...intercept1];
+    const tri2 = [...intercept1, ...insideVertexes[1], ...intercept2];
+    
+    return [tri1, tri2];
   }
 }
 ```
 
-Ogni riga OBJ inizia con un prefisso:
-- `v` → vertice (coordinate x,y,z)
-- `vn` → normale (ignorata)
-- `vt` → texture coordinate (ignorata)
-- `f` → faccia (triangolo)
+One vertex outside, two inside → we create a **quad (quadrilateral)** which we then divide into **two triangles**:
+- We find where the sides intersect the plane
+- We create two triangles that cover the area inside the plane
 
-Processiamo solo `v` e `f`.
-
-### sketch.js - Il Rendering
-
-Il file principale ora usa l'importer invece di triangoli hardcoded:
+### Near Plane Clipping
 
 ```javascript
-let triangles = [];
-let objImporter;
-
-function setup() {
-  objImporter = new ObjImporter();
-  createCanvas(winWidth, winHeight);
-}
-
-function draw() {
-  let projected_triangles = [];
-  background(220);
-  
-  if(objImporter.importDone) {
-    triangles = objImporter.triangoli;
-  }
-  
-  // ... resto del rendering come prima
-}
+const pointNearPlane = [0, 0, 0.01];
+const normalNearPlane = [0, 0, 1];
+let clippedTriangles = clipAgainstPlane(triViewSpace, pointNearPlane, normalNearPlane);
 ```
 
-Quando `objImporter.importDone` è true, copiamo i triangoli importati nell'array `triangles` e il nostro engine li renderizza!
+After the view transformation, we clip against the camera's **near plane** (z = 0.01). This prevents triangles behind the camera from causing projection issues.
 
-### Controlli Extra
+### Screen Space Clipping
 
 ```javascript
-function keyPressed() {
-  // ... controlli precedenti ...
-  
-  if(key === 'h') {
-    hideTrianglePoints = !hideTrianglePoints;
-    hideTriangleStroke = !hideTriangleStroke;
+const clipPlanes = [
+  [[0,0,0], [1,0,0]],         // Left
+  [[0,0,0], [0,1,0]],         // Up
+  [[width,0,0], [-1,0,0]],    // Right
+  [[0,height,0], [0,-1,0]],   // Bottom
+];
+
+let triQueue = [projected_triangles[i]];
+let newTriangles = 1;
+
+for(let planeIndex = 0; planeIndex < clipPlanes.length; planeIndex++) {
+  while(newTriangles > 0) {
+    const pointPlane = clipPlanes[planeIndex][0];
+    const normalPlane = clipPlanes[planeIndex][1];
+    const tri = triQueue[triQueue.length-1];
+    triQueue.length--;
+    newTriangles--;
+    
+    triQueue = [...clipAgainstPlane(tri, pointPlane, normalPlane), ...triQueue];
   }
+  newTriangles = triQueue.length;
 }
 ```
 
-Premendo **H** possiamo nascondere i punti e i bordi dei triangoli per vedere solo le facce solide.
+After projection, we clip against the **4 screen edges**:
+- **Left**: x = 0
+- **Right**: x = width
+- **Top**: y = 0
+- **Bottom**: y = height
 
-## Il Formato OBJ
+For each plane:
+1. We take all triangles in the queue
+2. We clip them one by one
+3. The resulting triangles are put back in the queue
+4. We move to the next plane
 
-Un file OBJ è un formato testo semplice:
-
-```
-# Commento
-v 0.0 0.0 0.0
-v 1.0 0.0 0.0
-v 0.5 1.0 0.0
-f 1 2 3
-```
-
-- `v x y z` → definisce un vertice
-- `f i1 i2 i3` → definisce un triangolo usando gli indici dei vertici
-- Gli indici partono da 1 (non da 0!)
-
-Formati più complessi possono includere:
-- `f 1/1/1 2/2/2 3/3/3` → vertice/texture/normale
-- Facce con 4+ vertici (quad) → il nostro parser li considera come un solo "triangolo" che verrà poi gestito dal clipping
-
-## Pipeline Completa
-
-1. **Upload**: l'utente seleziona un file .obj
-2. **Parsing**: `ObjImporter` legge vertici e facce
-3. **Conversione**: i dati OBJ diventano array di triangoli
-4. **Rendering**: il nostro engine 3D renderizza i triangoli con:
-   - Trasformazioni (rotazione, scala, traslazione)
-   - Back-face culling
-   - Illuminazione
-   - Clipping
-   - Proiezione prospettica
-   - Painter's algorithm
-
-## Concetti Chiave
-
-### File Reader API
-
-JavaScript può leggere file locali usando `FileReader`:
-```javascript
-const reader = new FileReader();
-reader.onload = e => {
-  const data = e.target.result;
-  // usa i dati
-};
-reader.readAsText(file);
-```
-
-### Indicizzazione Vertici
-
-Invece di duplicare coordinate, OBJ usa **indici**:
-- I vertici sono definiti una volta
-- Le facce referenziano i vertici per indice
-- Risparmia spazio e memoria
-
-### Triangolazione
-
-Molti modelli hanno quad (4 vertici). Il nostro parser li tratta come array più lunghi che il sistema di clipping può poi gestire.
-
-## Provalo
-
-1. Vai su [editor.p5js.org](https://editor.p5js.org/)
-2. Crea due file: `sketch.js` e `objImporter.js`
-3. Copia il codice in entrambi i file
-4. Scarica un modello .obj semplice (es. da [qui](https://github.com/AlessandroBonomo28/Elegoo-TouchScreen-2.8-GFX-fun/tree/base/p5%20js%20testing/youtube/obj%20files))
-5. Premi play e seleziona il file .obj
-6. Guarda il tuo modello renderizzato in 3D!
-
-Controlli:
-- **WASD** → movimento
-- **Mouse drag** → guarda in giro
-- **Spazio/Shift** → su/giù
-- **H** → nascondi/mostra wireframe
-- **T** → mostra/nascondi coordinate
-
-### Il codice intero
-
-Ecco qui `objImporter.js`:
+A triangle can be clipped multiple times, creating up to 8-9 triangles!
 
 ```javascript
-class ObjImporter{
-  constructor(){
-    this.importDone = false;
-    this.triangoli = [];
-    this.vertici = [];
-    let fileInput = createFileInput(file => {
-      const reader = new FileReader();
-      reader.onload = e => {
-        const data = e.target.result;
-        this.importDone = false;
-        this.triangoli = [];
-        this.vertici = [];
-        this.parseData(data);
-        this.importDone = true;
-        print(this.triangoli.length+" triangles imported.");
-      };
-      reader.readAsText(file.file);
-    });
-  }
-
-  parseData(data){
-    let inputStr = data 
-    let charK = '\n';
-    let i=0, j = 0;
-
-    while ((j = inputStr.indexOf(charK, i)) !== -1) {
-      this.parseLine(inputStr.substring(i, j))
-      i = j + 1;
-    }
-    this.parseLine(inputStr.substring(i))
-  }
-   parseVertex(data){
-    let splitted = data.split(' ')
-    this.vertici.push(splitted)
-  }
-  
-  parseFace(data){
-    let splitted = data.split(' ')
-    let triRead = [];
-    for(let i =0;i<splitted.length;i++){
-      if(splitted[i].includes('/')){
-        let slashSplit = splitted[i].split('/');
-        triRead = [...triRead, ...this.vertici[slashSplit[0]-1]];
-      } else {
-        triRead = [...triRead, ...this.vertici[splitted[i]-1]];
-      }
-    }
-    //print(triRead)
-    this.triangoli.push(triRead);
-  }
-  
-  parseLine(lineData){
-    if(lineData[0]=='v' && lineData[1]!='n' && lineData[1]!='t'){
-      this.parseVertex(lineData.substring(2))
-    } else if(lineData[0] == 'f'){
-      this.parseFace(lineData.substring(2))
-    }
-  }
+for(let n = 0; n < triQueue.length; n++) {
+  triangle(triQueue[n][0], triQueue[n][1],
+           triQueue[n][3], triQueue[n][4],
+           triQueue[n][6], triQueue[n][7]);
 }
 ```
 
-Ecco qui `sketch.js`:
+We draw all the triangles resulting from clipping.
+
+## Key Concepts
+
+### Why is Clipping Needed?
+
+Without clipping:
+- Triangles behind the camera project poorly (division by negative z!)
+- Triangles outside the screen waste resources
+- Visual artifacts when a triangle is partially visible
+
+### Sutherland-Hodgman Algorithm
+
+The algorithm used for screen-space clipping. Clips a polygon against one plane at a time, creating new vertices where necessary.
+
+### Complete Clipping Pipeline
+
+1. **View Space**: clipping against the near plane (z = 0.01)
+2. **Projection**: perspective transformation
+3. **Screen Space**: clipping against the 4 screen edges
+
+### Clipping Cases
+
+Each plane can generate:
+- **0 triangles**: all outside
+- **1 triangle**: all inside OR only 1 vertex inside
+- **2 triangles**: 2 vertices inside (forms a quad)
+
+## Try It Out
+
+Go to [editor.p5js.org](https://editor.p5js.org/) and copy and paste the code:
+
+- Get very close to the cube (press W)
+- Watch how the triangles are cut correctly when they exit the screen
+- Without clipping, you would see strange artifacts!
 
 ```javascript
 const zNear= 0.1;
 const zFar = 1000;
-const winWidth = 700;
+const winWidth = 400;
 const winHeight = 400;
 const aspectRatio = winHeight/winWidth;
 
@@ -325,16 +256,12 @@ let vUp = [0,1,0];
 let vRight = [1,0,0];
 let vForward = [0,0,1];
 
-let hideTrianglePoints = true;
-let hideTriangleStroke = true;
-let isTextVisible = false;
+let isTextVisible = true;
 let isDragging = false;
 let xDrag = 0,yDrag = 0;
 let startX,startY;
 
-let triangles = [];
-let objImporter;
-/*
+
 // clockwise triangle vertex ordering
 let triangles = [
   // SOUTH
@@ -363,7 +290,7 @@ let triangles = [
   [1.0, 0.0, 1.0,    0.0, 0.0, 1.0,    0.0, 0.0, 0.0],
   [1.0, 0.0, 1.0,    0.0, 0.0, 0.0,    1.0, 0.0, 0.0],
 ];
-*/
+
 
 let projectionMatrix = [
   [aspectRatio, 0, 0, 0],
@@ -486,7 +413,6 @@ function getLookAtMatrix(vUp,vRight,vForward,vPos){
 }
 
 function setup() {
-  objImporter = new ObjImporter();
   createCanvas(winWidth, winHeight);
 }
 
@@ -623,20 +549,10 @@ function clipAgainstPlane(triToClip,planePoint,planeNormalTowardsInside) {
 
 let angleSum = 0;
 function draw() {
-  background(220);
-  stroke('black');
-  while(!objImporter.importDone){
-    textSize(20);
-    noStroke()
-    textAlign(CENTER,CENTER)
-    text("Obj file not loaded",
-        width/2,height/2);
-    stroke('black')
-    return;
-  }
-  triangles = objImporter.triangoli;
   
   let projected_triangles = [];
+  background(220);
+  stroke('black');
   
   for(let i= 0; i< triangles.length; i++){
     let triWorldSpace = [];
@@ -654,7 +570,7 @@ function draw() {
       let scale_y = 1;
       let scale_z =1;
 
-      scale_x = scale_y = scale_z = 1;
+      scale_x = scale_y = scale_z = 4;
 
       const scaleMatrix = [
         [scale_x,0,0,0],
@@ -672,13 +588,13 @@ function draw() {
       let axisRotation = vec3normalize([1,1,1]);
 
       let matRotation = 
-          //getRotationMatrixArbitraryAxis(axisRotation,angleSum);
+          getRotationMatrixArbitraryAxis(axisRotation,angleSum);
       //getRotationMatrixY(angleSum);
-      
+      /*
       mat4x4(getRotationMatrixZ(angleSum),
           mat4x4(getRotationMatrixY(angleSum),getRotationMatrixX(angleSum)
             ));
-      
+      */
       let matTranslationScaleRotation = mat4x4(mat4x4(translationMatrix,scaleMatrix),matRotation);
 
 
@@ -756,7 +672,7 @@ function draw() {
 
         if(zDepth< 1){
           strokeWeight(5)
-          if(!hideTrianglePoints) point(x,y);
+          point(x,y)
           if(isTextVisible){
             strokeWeight(0);
             textSize(10);
@@ -794,7 +710,7 @@ function draw() {
     const triColor = 255 * max(projected_triangles[i].shading, 0.15);
     stroke('black')
     strokeWeight(1);
-    if(hideTriangleStroke)stroke(triColor) 
+    //stroke(triColor) 
     fill(triColor);
 
 
@@ -903,10 +819,6 @@ function keyPressed() {
   }
   else if(key === 't'){
     isTextVisible = !isTextVisible;
-  }
-  else if(key === 'h'){
-    hideTrianglePoints = !hideTrianglePoints;
-    hideTriangleStroke = !hideTriangleStroke;
   }
 }
 

@@ -1,4 +1,6 @@
 ---
+lang: it
+lang_ref: emiglio-3
 title: "Emiglio bluetooth speaker (Parte 3) "
 date: 2026-06-24 00:00:00 +0000
 categories: [tutorials, electronics]

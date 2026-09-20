@@ -1,23 +1,25 @@
 ---
-lang: it
+lang: en
+hidden: true
 lang_ref: 3d-engine-2
+permalink: /en/posts/Scrivere-un-3d-engine-da-zero-tutorial-2/
 categories: [tutorials,3Dengine]
 tags: [tutorial, 3Dengine, p5js, builtfromscratch]
 image:
   path: /assets/img/posts/3dengine/cover-2.jpg
-  alt: Proiezioni 3D in p5.js
+  alt: 3D Projections in p5.js
 ---
-# Proiezioni 3D in p5.js
+# 3D Projections in p5.js
 
 {% include embed/youtube.html id='oKl1viZchsk' %}
 
-## Cosa Facciamo
+## What We Do
 
-In questo tutorial creiamo la proiezione 2D di un cubo 3D. Prendiamo 8 punti nello spazio tridimensionale (i vertici di un cubo) e li proiettiamo sullo schermo.
+In this tutorial we create the 2D projection of a 3D cube. We take 8 points in three-dimensional space (the vertices of a cube) and project them onto the screen.
 
-## Il Codice Spiegato
+## The Code Explained
 
-### I Vertici del Cubo
+### The Vertices of the Cube
 
 ```javascript
 let points = [
@@ -32,7 +34,7 @@ let points = [
 ];
 ```
 
-Definiamo gli 8 vertici di un cubo centrato nell'origine. Ogni punto ha coordinate [x, y, z].
+We define the 8 vertices of a cube centered at the origin. Each point has [x, y, z] coordinates.
 
 ### Setup
 
@@ -42,9 +44,9 @@ function setup() {
 }
 ```
 
-Creiamo un canvas di 500×400 pixel.
+We create a 500x400 pixel canvas.
 
-### Il Calcolo della Profondità
+### Depth Calculation
 
 ```javascript
 const zNear = 0.1;
@@ -57,9 +59,9 @@ function computeDepth(z_vertex) {
 }
 ```
 
-Questa funzione calcola la profondità del punto usando i piani near e far, utile per il depth clipping (decidere cosa è visibile).
+This function calculates the depth of the point using the near and far planes, useful for depth clipping (deciding what is visible).
 
-### La Proiezione
+### The Projection
 
 ```javascript
 function draw() {
@@ -78,10 +80,10 @@ function draw() {
     let z = points[i][2] + translate_z;
 ```
 
-Per ogni vertice:
-- Calcoliamo l'aspect ratio per mantenere proporzioni corrette
-- Trasliamo il cubo nella posizione desiderata (soprattutto in z=5, davanti alla camera)
-- Invertiamo y perché lo schermo ha coordinate invertite
+For each vertex:
+- We calculate the aspect ratio to keep correct proportions
+- We translate the cube to the desired position (especially in z=5, in front of the camera)
+- We invert y because the screen has inverted coordinates
 
 ```javascript
     let zDepth = computeDepth(z);
@@ -94,7 +96,7 @@ Per ogni vertice:
     }
 ```
 
-Dividiamo x e y per z: questa è la **proiezione prospettica**. Gli oggetti più lontani (z maggiore) risultano più piccoli.
+We divide x and y by z: this is the **perspective projection**. Objects further away (greater z) appear smaller.
 
 ```javascript
     // Convertiamo da spazio normalizzato (-1,1) a coordinate schermo
@@ -110,24 +112,24 @@ Dividiamo x e y per z: questa è la **proiezione prospettica**. Gli oggetti più
 }
 ```
 
-Convertiamo le coordinate normalizzate in pixel e disegniamo solo i punti visibili (zDepth < 1).
+We convert the normalized coordinates to pixels and draw only the visible points (zDepth < 1).
 
-## Concetti Chiave
+## Key Concepts
 
-### Proiezione Prospettica
-Dividere x e y per z crea l'effetto prospettico: oggetti lontani appaiono più piccoli, come nella realtà.
+### Perspective Projection
+Dividing x and y by z creates the perspective effect: objects further away appear smaller, just like in reality.
 
-### Trasformazioni
-- **Traslazione**: spostiamo il cubo nello spazio 3D
-- **Aspect Ratio**: correggiamo la proporzione per canvas non quadrati
-- **Mapping**: convertiamo da coordinate 3D a coordinate schermo
+### Transformations
+- **Translation**: we move the cube in 3D space
+- **Aspect Ratio**: we correct the proportion for non-square canvases
+- **Mapping**: we convert from 3D coordinates to screen coordinates
 
 ### Depth Clipping
-Il test `if(zDepth < 1)` determina se un punto è visibile o fuori dal frustum della camera.
+The test `if(zDepth < 1)` determines if a point is visible or outside the camera's frustum.
 
-## Provalo
+## Try It
 
-Vai su [editor.p5js.org](https://editor.p5js.org/), copia il codice e osserva gli 8 vertici del cubo proiettati sullo schermo!
+Go to [editor.p5js.org](https://editor.p5js.org/), copy the code and observe the 8 vertices of the cube projected on the screen!
 
 ```javascript
 let points = [

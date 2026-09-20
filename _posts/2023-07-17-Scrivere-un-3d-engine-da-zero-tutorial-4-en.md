@@ -1,23 +1,25 @@
 ---
-lang: it
+lang: en
+hidden: true
 lang_ref: 3d-engine-4
+permalink: /en/posts/Scrivere-un-3d-engine-da-zero-tutorial-4/
 categories: [tutorials,3Dengine]
 tags: [tutorial, 3Dengine, p5js, builtfromscratch]
 image:
   path: /assets/img/posts/3dengine/cover-4.jpg
-  alt: Matrici di trasformazione in p5.js
+  alt: Transformation matrices in p5.js
 ---
-# Matrici di Trasformazione in p5.js
+# Transformation Matrices in p5.js
 
 {% include embed/youtube.html id='e8Et4QFrZhc' %}
 
-## Cosa Facciamo
+## What We Do
 
-In questo tutorial completiamo il cubo 3D! Aggiungiamo **rotazione**, **scala**, **traslazione** usando matrici, e colleghiamo i vertici con linee per vedere un cubo solido che ruota nello spazio.
+In this tutorial we complete the 3D cube! We add **rotation**, **scale**, **translation** using matrices, and we connect the vertices with lines to see a solid cube rotating in space.
 
-## Il Codice Spiegato
+## The Code Explained
 
-### Funzioni Vettoriali
+### Vector Functions
 
 ```javascript
 function vec3Len(v) {
@@ -31,9 +33,9 @@ function vec3normalize(v) {
 }
 ```
 
-Calcoliamo la lunghezza di un vettore e lo normalizziamo (portandolo a lunghezza 1). Serve per definire assi di rotazione.
+We calculate the length of a vector and normalize it (bringing it to length 1). It is needed to define rotation axes.
 
-### Matrici di Rotazione
+### Rotation Matrices
 
 ```javascript
 function getRotationMatrixX(angle) {
@@ -68,9 +70,9 @@ function getRotationMatrixZ(angle) {
 }
 ```
 
-Tre matrici per ruotare attorno agli assi X, Y e Z. Usano seno e coseno dell'angolo.
+Three matrices to rotate around the X, Y, and Z axes. They use sine and cosine of the angle.
 
-### Rotazione su Asse Arbitrario
+### Arbitrary Axis Rotation
 
 ```javascript
 function getRotationMatrixArbitraryAxis(a, theta) {
@@ -87,9 +89,9 @@ function getRotationMatrixArbitraryAxis(a, theta) {
 }
 ```
 
-Questa matrice permette di ruotare attorno a **qualsiasi asse** nello spazio 3D, non solo X, Y o Z. Usa la formula di Rodrigues.
+This matrix allows rotating around **any axis** in 3D space, not just X, Y, or Z. It uses Rodrigues' rotation formula.
 
-### Moltiplicazione tra Matrici
+### Matrix Multiplication
 
 ```javascript
 function mat4x4(mat1, mat2) {
@@ -109,9 +111,9 @@ function mat4x4(mat1, mat2) {
 }
 ```
 
-Moltiplica due matrici 4×4. Serve per combinare più trasformazioni in una sola matrice.
+Multiplies two 4x4 matrices. It is needed to combine multiple transformations into a single matrix.
 
-### Il Loop Principale
+### The Main Loop
 
 ```javascript
 let angleSum = 0;
@@ -132,7 +134,7 @@ function draw() {
     let vertice = [...points[i], 1];
 ```
 
-Inizializziamo l'array per i punti proiettati e i parametri di trasformazione.
+We initialize the array for projected points and transformation parameters.
 
 ```javascript
     const scaleMatrix = [
@@ -150,7 +152,7 @@ Inizializziamo l'array per i punti proiettati e i parametri di trasformazione.
     ];
 ```
 
-Creiamo le matrici di scala e traslazione.
+We create the scale and translation matrices.
 
 ```javascript
     let mat = mat4x4(translationMatrix, scaleMatrix);
@@ -161,9 +163,9 @@ Creiamo le matrici di scala e traslazione.
     vertice = multiplyVectorMatrix(vertice, mat);
 ```
 
-- Combiniamo traslazione e scala in una matrice
-- Definiamo l'asse di rotazione [1,1,1] normalizzato (rotazione diagonale)
-- Applichiamo prima la rotazione, poi traslazione e scala
+- We combine translation and scale into one matrix
+- We define the normalized rotation axis [1,1,1] (diagonal rotation)
+- We apply first the rotation, then translation and scale
 
 ```javascript
     let projected = multiplyVectorMatrix(vertice, projectionMatrix);
@@ -190,9 +192,9 @@ Creiamo le matrici di scala e traslazione.
   }
 ```
 
-Proiettiamo, normalizziamo e salviamo tutti i punti.
+We project, normalize and save all points.
 
-### Disegnare le Linee del Cubo
+### Drawing the Lines of the Cube
 
 ```javascript
   for(let i = 0; i < 4; i++) {
@@ -218,11 +220,11 @@ Proiettiamo, normalizziamo e salviamo tutti i punti.
   }
 ```
 
-Colleghiamo i vertici con linee colorate:
-- Faccia frontale (vertici 0-3)
-- Faccia posteriore (vertici 4-7)
-- Connessioni tra le due facce
-- Skippiamo le linee fuori dal frustum (clipping)
+We connect the vertices with colored lines:
+- Front face (vertices 0-3)
+- Back face (vertices 4-7)
+- Connections between the two faces
+- We skip lines outside the frustum (clipping)
 
 ```javascript
   angleSum += deltaTime * Math.PI/5000;
@@ -231,24 +233,24 @@ Colleghiamo i vertici con linee colorate:
 }
 ```
 
-Incrementiamo l'angolo ogni frame per far ruotare il cubo continuamente.
+We increment the angle every frame to make the cube rotate continuously.
 
-## Concetti Chiave
+## Key Concepts
 
-### Ordine delle Trasformazioni
-L'ordine è importante! Nel codice: **Rotazione → Traslazione → Proiezione**
+### Order of Transformations
+The order is important! In the code: **Rotation → Translation → Projection**
 
-Se facessi Traslazione → Rotazione, il cubo ruoterebbe attorno a un punto diverso.
+If we did Translation → Rotation, the cube would rotate around a different point.
 
-### Composizione di Matrici
-Invece di applicare ogni matrice separatamente al vertice, possiamo moltiplicare le matrici tra loro e applicare il risultato una volta sola. È più efficiente!
+### Matrix Composition
+Instead of applying each matrix separately to the vertex, we can multiply the matrices together and apply the result only once. It's more efficient!
 
 ### Clipping
-Il controllo `if(zDepth >= 1)` evita di disegnare linee fuori dalla visuale della camera.
+The `if(zDepth >= 1)` check prevents drawing lines outside the camera view.
 
-## Provalo
+## Try It
 
-Vai su [editor.p5js.org](https://editor.p5js.org/) e osserva il cubo che ruota nello spazio 3D!
+Go to [editor.p5js.org](https://editor.p5js.org/) and observe the cube rotating in 3D space!
 
 ```javascript
 const zNear= 0.1;

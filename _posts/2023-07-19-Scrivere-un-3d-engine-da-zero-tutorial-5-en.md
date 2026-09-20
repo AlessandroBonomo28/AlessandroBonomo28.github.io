@@ -1,23 +1,25 @@
 ---
-lang: it
+lang: en
+hidden: true
 lang_ref: 3d-engine-5
+permalink: /en/posts/Scrivere-un-3d-engine-da-zero-tutorial-5/
 categories: [tutorials,3Dengine]
 tags: [tutorial, 3Dengine, p5js, builtfromscratch]
 image:
   path: /assets/img/posts/3dengine/cover-5.jpg
-  alt: Camera e navigazione 3D in p5.js
+  alt: Camera and 3D navigation in p5.js
 ---
-# Camera e Navigazione 3D in p5.js - 3D Engine Tutorial 5
+# Camera and 3D Navigation in p5.js - 3D Engine Tutorial 5
 
 {% include embed/youtube.html id='cAxENz1Mde4' %}
 
-## Cosa Facciamo
+## What We're Doing
 
-In questo tutorial aggiungiamo una **camera controllabile**! Puoi muoverti nello spazio 3D con WASD, guardare in giro trascinando il mouse, e vedere gli assi di riferimento. È come un mini motore 3D first-person!
+In this tutorial we add a **controllable camera**! You can move around in 3D space with WASD, look around by dragging the mouse, and see the reference axes. It's like a first-person mini 3D engine!
 
-## Il Codice Spiegato
+## The Code Explained
 
-### Variabili della Camera
+### Camera Variables
 
 ```javascript
 let cameraYaw = 0;
@@ -29,12 +31,12 @@ let vRight = [1, 0, 0];
 let vForward = [0, 0, 1];
 ```
 
-- `cameraYaw`: rotazione orizzontale (sinistra/destra)
-- `cameraPitch`: rotazione verticale (su/giù)
-- `playerPos`: posizione della camera nello spazio
-- `vUp`, `vRight`, `vForward`: gli assi del sistema di coordinate della camera
+- `cameraYaw`: horizontal rotation (left/right)
+- `cameraPitch`: vertical rotation (up/down)
+- `playerPos`: camera position in space
+- `vUp`, `vRight`, `vForward`: the axes of the camera coordinate system
 
-### Prodotto Vettoriale
+### Cross Product
 
 ```javascript
 function crossProduct(v1, v2) {
@@ -45,9 +47,9 @@ function crossProduct(v1, v2) {
 }
 ```
 
-Il prodotto vettoriale genera un vettore perpendicolare a due vettori dati. Lo usiamo per calcolare `vRight` partendo da `vUp` e `vForward`.
+The cross product generates a vector perpendicular to two given vectors. We use it to calculate `vRight` starting from `vUp` and `vForward`.
 
-### Matrice Look-At
+### Look-At Matrix
 
 ```javascript
 function getLookAtMatrix(vUp, vRight, vForward, vPos) {
@@ -69,11 +71,11 @@ function getLookAtMatrix(vUp, vRight, vForward, vPos) {
 }
 ```
 
-Questa matrice trasforma il mondo dal punto di vista della camera. Combina:
-- **Rotazione**: orienta il mondo secondo gli assi della camera
-- **Traslazione**: sposta il mondo in base alla posizione della camera
+This matrix transforms the world from the camera's point of view. It combines:
+- **Rotation**: orients the world according to the camera's axes
+- **Translation**: moves the world based on the camera's position
 
-### Il Loop Principale
+### The Main Loop
 
 ```javascript
 function draw() {
@@ -92,9 +94,9 @@ function draw() {
 }
 ```
 
-Ora il flusso è: **Trasformazioni Oggetto → View (Camera) → Proiezione**
+Now the flow is: **Object Transformations → View (Camera) → Projection**
 
-### Controlli Tastiera
+### Keyboard Controls
 
 ```javascript
 function keyPressed() {
@@ -138,11 +140,11 @@ function keyPressed() {
 }
 ```
 
-Due modalità di movimento:
-- **Assoluta**: WASD muove lungo assi fissi
-- **Relativa**: WASD muove nella direzione in cui guardi (come nei giochi FPS)
+Two movement modes:
+- **Absolute**: WASD moves along fixed axes
+- **Relative**: WASD moves in the direction you are looking (like in FPS games)
 
-### Controlli Mouse
+### Mouse Controls
 
 ```javascript
 function mousePressed() {
@@ -173,12 +175,12 @@ function updateLook() {
 }
 ```
 
-Trascinando il mouse:
-- Movimento orizzontale → cambia `cameraYaw` (guardi sinistra/destra)
-- Movimento verticale → cambia `cameraPitch` (guardi su/giù)
-- Ricalcola i vettori `vForward`, `vUp`, `vRight` in base alla rotazione
+Dragging the mouse:
+- Horizontal movement → changes `cameraYaw` (look left/right)
+- Vertical movement → changes `cameraPitch` (look up/down)
+- Recalculates `vForward`, `vUp`, `vRight` vectors based on the rotation
 
-### Rendering degli Assi
+### Axis Rendering
 
 ```javascript
 function renderAxis(axis, aColor, aText) {
@@ -203,9 +205,9 @@ function renderAxis(axis, aColor, aText) {
 }
 ```
 
-Disegna gli assi X (rosso), Y (verde), Z (blu) partendo dall'origine. Proietta sia l'origine (0,0,0) che il punto finale dell'asse (1,0,0 per X, ecc.) e li collega con una linea.
+Draws the X (red), Y (green), Z (blue) axes starting from the origin. Projects both the origin (0,0,0) and the axis end point (1,0,0 for X, etc.) and connects them with a line.
 
-### Info HUD
+### HUD Info
 
 ```javascript
 const _yaw = round(cameraYaw * (180/Math.PI) % 360, 1);
@@ -214,29 +216,29 @@ text("Position: (" + playerPos.map(x => round(x, 1)) + ")", 5, 40);
 text("Rotation: (" + _yaw + "°," + _pitch + "°,0)", 5, 20);
 ```
 
-Mostra posizione e rotazione della camera sullo schermo (converti radianti in gradi).
+Shows the camera position and rotation on the screen (convert radians to degrees).
 
-## Concetti Chiave
+## Key Concepts
 
-### Sistema di Coordinate della Camera
-La camera ha il suo sistema di coordinate:
-- **Forward**: dove guardi
-- **Up**: sopra la tua testa
-- **Right**: alla tua destra (calcolato con il prodotto vettoriale)
+### Camera Coordinate System
+The camera has its own coordinate system:
+- **Forward**: where you are looking
+- **Up**: above your head
+- **Right**: to your right (calculated with the cross product)
 
-### Matrice View
-Trasforma il mondo dal punto di vista della camera. È l'inverso delle trasformazioni della camera stessa.
+### View Matrix
+Transforms the world from the camera's point of view. It is the inverse of the camera's own transformations.
 
 ### FPS Controls
-Movimento relativo + mouse look = controlli tipici dei giochi first-person!
+Relative movement + mouse look = typical first-person game controls!
 
-## Provalo
+## Try It Out
 
-Vai su [editor.p5js.org](https://editor.p5js.org/) e:
-- **WASD** per muoverti
-- **Spazio/Shift** per salire/scendere
-- **Trascina il mouse** per guardare in giro
-- **T** per mostrare/nascondere le coordinate
+Go to [editor.p5js.org](https://editor.p5js.org/) and:
+- **WASD** to move
+- **Space/Shift** to go up/down
+- **Drag the mouse** to look around
+- **T** to show/hide coordinates
 
 ```javascript
 const zNear= 0.1;

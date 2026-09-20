@@ -1,4 +1,6 @@
 ---
+lang: it
+lang_ref: emiglio-4
 title: "Emiglio robot con cingoli da carro armato (Parte 4) "
 date: 2026-06-24 00:00:00 +0000
 categories: [tutorials, electronics]

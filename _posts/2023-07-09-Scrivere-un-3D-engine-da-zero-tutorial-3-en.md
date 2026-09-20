@@ -1,23 +1,25 @@
 ---
-lang: it
+lang: en
+hidden: true
 lang_ref: 3d-engine-3
+permalink: /en/posts/Scrivere-un-3D-engine-da-zero-tutorial-3/
 categories: [tutorials,3Dengine]
 tags: [tutorial, 3Dengine, p5js, builtfromscratch]
 image:
   path: /assets/img/posts/3dengine/cover-3.jpg
-  alt: Matrici di proiezione in p5.js
+  alt: Projection matrices in p5.js
 ---
-# Matrici di Proiezione in p5.js
+# Projection Matrices in p5.js
 
 {% include embed/youtube.html id='Ngx1xuyGa_w' %}
 
-## Cosa Facciamo
+## What We Do
 
-In questo tutorial usiamo le **matrici** per fare la proiezione 3D. Invece di calcolare manualmente ogni trasformazione, usiamo una matrice di proiezione che fa tutto il lavoro in un colpo solo.
+In this tutorial we use **matrices** to do 3D projection. Instead of manually calculating each transformation, we use a projection matrix that does all the work at once.
 
-## Il Codice Spiegato
+## The Code Explained
 
-### Parametri e Vertici
+### Parameters and Vertices
 
 ```javascript
 const zNear = 0.1;
@@ -38,9 +40,9 @@ let points = [
 ];
 ```
 
-Definiamo i parametri della camera e gli 8 vertici del cubo.
+We define the camera parameters and the 8 vertices of the cube.
 
-### La Matrice di Proiezione
+### The Projection Matrix
 
 ```javascript
 let projectionMatrix = [
@@ -51,13 +53,13 @@ let projectionMatrix = [
 ];
 ```
 
-Questa matrice 4×4 contiene **tutte** le trasformazioni:
-- **Riga 1**: gestisce x e l'aspect ratio
-- **Riga 2**: inverte y (da -1 a 1)
-- **Riga 3**: calcola la profondità per il depth clipping
-- **Riga 4**: copia z nella quarta componente per la divisione prospettica
+This 4x4 matrix contains **all** the transformations:
+- **Row 1**: handles x and the aspect ratio
+- **Row 2**: inverts y (from -1 to 1)
+- **Row 3**: calculates depth for depth clipping
+- **Row 4**: copies z into the fourth component for perspective division
 
-### Moltiplicazione Matrice-Vettore
+### Matrix-Vector Multiplication
 
 ```javascript
 function multiplyVectorMatrix(vector, matrix) {
@@ -76,9 +78,9 @@ function multiplyVectorMatrix(vector, matrix) {
 }
 ```
 
-Questa funzione moltiplica un vettore (vertice 3D) per una matrice 4×4. È il cuore della trasformazione: prende un punto 3D e lo trasforma applicando tutte le operazioni della matrice.
+This function multiplies a vector (3D vertex) by a 4x4 matrix. It's the core of the transformation: it takes a 3D point and transforms it applying all the operations of the matrix.
 
-### Il Loop di Rendering
+### The Rendering Loop
 
 ```javascript
 function draw() {
@@ -97,9 +99,9 @@ function draw() {
     vertice[2] += translate_z;
 ```
 
-Per ogni vertice:
-- Lo trasformiamo in coordinate omogenee aggiungendo 1 come quarta componente
-- Applichiamo la traslazione manualmente
+For each vertex:
+- We transform it into homogeneous coordinates by adding 1 as the fourth component
+- We apply the translation manually
 
 ```javascript
     // Applichiamo la matrice di proiezione
@@ -111,7 +113,7 @@ Per ogni vertice:
     let z = projected[3];
 ```
 
-La moltiplicazione matrice-vettore produce il punto proiettato con 4 componenti.
+The matrix-vector multiplication produces the projected point with 4 components.
 
 ```javascript
     // Divisione prospettica
@@ -134,32 +136,32 @@ La moltiplicazione matrice-vettore produce il punto proiettato con 4 componenti.
 }
 ```
 
-Dividiamo per z (divisione prospettica), convertiamo in pixel e disegniamo.
+We divide by z (perspective division), convert to pixels and draw.
 
-## Perché le Matrici?
+## Why Matrices?
 
-### Vantaggi
-- **Una sola operazione**: tutte le trasformazioni in un colpo
-- **Componibili**: puoi moltiplicare matrici tra loro per combinarle
-- **Standard**: è così che funzionano OpenGL, WebGL e tutti i motori 3D
+### Advantages
+- **A single operation**: all transformations at once
+- **Composable**: you can multiply matrices together to combine them
+- **Standard**: this is how OpenGL, WebGL and all 3D engines work
 
-### Coordinate Omogenee
-Usiamo 4 componenti [x, y, z, w] invece di 3 perché:
-- La quarta componente (w=1) permette di rappresentare traslazioni con matrici
-- Dopo la proiezione, w contiene z per la divisione prospettica
+### Homogeneous Coordinates
+We use 4 components [x, y, z, w] instead of 3 because:
+- The fourth component (w=1) allows representing translations with matrices
+- After the projection, w contains z for the perspective division
 
-## Il Flusso Completo
+## The Complete Flow
 
-1. Vertice 3D → [x, y, z, 1]
-2. Traslazione → sposta il cubo davanti alla camera
-3. Matrice di proiezione → trasforma tutto in un colpo
-4. Divisione prospettica → dividi x, y, z per w
-5. Mapping → converti in coordinate schermo
-6. Disegna se visibile
+1. 3D Vertex → [x, y, z, 1]
+2. Translation → moves the cube in front of the camera
+3. Projection matrix → transforms everything at once
+4. Perspective division → divide x, y, z by w
+5. Mapping → convert to screen coordinates
+6. Draw if visible
 
-## Provalo
+## Try It
 
-Vai su [editor.p5js.org](https://editor.p5js.org/) e osserva come una singola moltiplicazione matrice-vettore fa tutto il lavoro!
+Go to [editor.p5js.org](https://editor.p5js.org/) and see how a single matrix-vector multiplication does all the work!
 
 ```javascript
 const zNear= 0.1;

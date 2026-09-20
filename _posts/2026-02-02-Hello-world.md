@@ -1,4 +1,6 @@
 ---
+lang: it
+lang_ref: hello-world
 title: "Come ho fatto questo blog"
 date: 2026-02-08 00:00:00 +0000
 categories: [tutorials]
