@@ -139,6 +139,8 @@ Già che il PC pubblica la voce verso Emiglio, ho aggiunto una pagina con qualch
 
 ## Il risultato
 
+{% include embed/youtube.html id='BRS-6A5bKZg' %}
+
 Emiglio ora vede quello che ha davanti, ascolta e risponde in tempo reale, senza cloud e senza limiti di tempo. Il codice è tutto nei due repo linkati sopra, con i README che spiegano ogni dettaglio che qui ho saltato.
 
 **STAY TUNED** per i prossimi tutorial!
