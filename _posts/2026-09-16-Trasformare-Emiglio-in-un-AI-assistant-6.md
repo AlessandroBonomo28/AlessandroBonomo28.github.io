@@ -25,6 +25,8 @@ Il progetto è diviso in due repo:
 
 L'idea di fondo è semplice: il PC deve vedere Emiglio come una **normale webcam e un normale microfono**. Così MiniCPM-o (o Discord, o qualunque altra cosa) non sa nemmeno che dall'altra parte c'è un robot.
 
+{% include embed/youtube.html id='BRS-6A5bKZg' %}
+
 ## Link componenti
 
 - [Raspberry pi zero W2](https://amzn.to/3SuylLD)
